@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Your Profile</title>
+
+    <!-- Fonts + Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                primary: "#4CAF50",
+                "primary-dark": "#2E7D32",
+                "background-light": "#F5F5F5",
+                "background-dark": "#1a1a1a",
+                "text-light": "#333333",
+                "text-dark": "#F5F5F5",
+              },
+              fontFamily: { display: ["Manrope", "sans-serif"] },
+            }
+          }
+        }
+    </script>
+
+    <style>
+        /* Background image */
+        body {
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)
+            ),
+            url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        /* Glassy profile card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 1rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        /* Input fields */
+        input {
+            color: #fff !important;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Section titles */
+        label span {
+            color: #e6e6e6;
+        }
+
+        /* Buttons */
+        button {
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049 !important;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+    </style>
+</head>
+
+<body class="font-display text-text-light dark:text-text-dark min-h-screen flex items-center justify-center px-4 py-12">
+
+<!-- Glassy Profile Card -->
+<div class="glass-card w-full max-w-2xl p-8 md:p-12">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <p class="text-3xl sm:text-4xl font-black tracking-[-0.033em] text-white drop-shadow">
+            Your Profile
+        </p>
+        <div class="flex gap-2">
+            <a href="/dashboard"
+               class="flex items-center justify-center rounded-full h-10 px-4 text-sm font-bold text-white bg-white/10 hover:bg-white/20 transition">
+                Dashboard
+            </a>
+            <a href="/"
+               class="flex items-center justify-center rounded-full h-10 px-4 text-sm font-bold text-white bg-white/10 hover:bg-white/20 transition">
+                Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Profile Form -->
+    <form th:action="@{/profile}" th:object="${user}" method="post" class="space-y-6">
+
+        <!-- Username -->
+        <label class="flex flex-col w-full">
+            <span class="text-base font-medium pb-2">Username</span>
+            <input type="text" th:field="*{username}" required
+                   class="form-input flex w-full rounded-lg bg-white/10 border border-white/30 focus:border-primary focus:ring-primary h-14 p-4 placeholder:text-white/70" />
+        </label>
+
+        <!-- Email -->
+        <label class="flex flex-col w-full">
+            <span class="text-base font-medium pb-2">Email</span>
+            <input type="email" th:field="*{email}" required
+                   class="form-input flex w-full rounded-lg bg-white/10 border border-white/30 focus:border-primary focus:ring-primary h-14 p-4 placeholder:text-white/70" />
+        </label>
+
+        <!-- New Password -->
+        <label class="flex flex-col w-full">
+            <span class="text-base font-medium pb-2">New Password</span>
+            <input type="password" th:field="*{password}" placeholder="••••••••"
+                   class="form-input flex w-full rounded-lg bg-white/10 border border-white/30 focus:border-primary focus:ring-primary h-14 p-4 placeholder:text-white/70" />
+            <span class="text-sm text-white/70 pt-2">Leave blank to keep current password</span>
+        </label>
+
+        <!-- Submit Button -->
+        <div class="pt-4 border-t border-white/20">
+            <button type="submit"
+                    class="flex w-full sm:w-auto sm:ml-auto items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-wide shadow-md hover:bg-primary-dark">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
