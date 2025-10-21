@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#17cf17",
+                "background-light": "#f6f8f6",
+                "background-dark": "#112111",
+              },
+              fontFamily: { "display": ["Manrope", "sans-serif"] }
+            },
+          },
+        }
+    </script>
+
+    <style>
+        /* 🌿 Background Image Styling */
+        body {
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+            ),
+            url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* ✨ Glassy Card Styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15); /* Transparent layer */
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+        }
+
+        /* Title Text Glow */
+        .title-glow {
+            text-shadow: 0 0 10px rgba(23, 207, 23, 0.3);
+        }
+
+        /* Smooth button hover effect */
+        .btn-glass {
+            background: rgba(23, 207, 23, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glass:hover {
+            background: rgba(23, 207, 23, 1);
+            box-shadow: 0 0 15px rgba(23, 207, 23, 0.6);
+        }
+    </style>
+</head>
+
+<body class="font-display min-h-screen flex items-center justify-center text-white">
+
+<!-- Login Card Centered -->
+<div class="w-full max-w-md glass-card">
+    <!-- Title -->
+    <div class="flex flex-col gap-2 text-center mb-6">
+        <p class="text-4xl font-black text-primary title-glow">PropertEase</p>
+        <p class="text-sm text-gray-200">Welcome back! Please enter your details.</p>
+    </div>
+
+    <!-- Error / Logout messages -->
+    <div th:if="${param.error}" class="bg-red-100/80 text-red-700 text-sm p-3 rounded mb-2">Invalid email or password.</div>
+    <div th:if="${param.logout}" class="bg-green-100/80 text-green-700 text-sm p-3 rounded mb-2">You have been signed out.</div>
+
+    <!-- Login Form -->
+    <form th:action="@{/login}" method="post" class="flex flex-col gap-4">
+        <!-- Email -->
+        <label class="flex flex-col">
+            <span class="text-sm font-medium pb-1 text-white">Email</span>
+            <input name="email" type="email" placeholder="you@example.com" required
+                   class="form-input rounded-lg border border-white/40 bg-white/20 h-12 px-3 text-white placeholder:text-gray-300 focus:border-primary focus:outline-none"/>
+        </label>
+
+        <!-- Password -->
+        <label class="flex flex-col">
+            <span class="text-sm font-medium pb-1 text-white">Password</span>
+            <input name="password" type="password" placeholder="••••••••" required
+                   class="form-input rounded-lg border border-white/40 bg-white/20 h-12 px-3 text-white placeholder:text-gray-300 focus:border-primary focus:outline-none"/>
+        </label>
+
+        <!-- Forgot Password -->
+        <a href="#" class="text-[#a6f3a6] text-sm underline text-right">Forgot Password?</a>
+
+        <!-- Submit -->
+        <button type="submit"
+                class="rounded-lg h-12 btn-glass text-[#0e1b0e] font-bold tracking-wide">
+            Sign In
+        </button>
+    </form>
+
+    <!-- Register / Home links -->
+    <p class="text-center text-sm text-gray-200 mt-4">
+        Don’t have an account?
+        <a href="/#join" class="font-bold underline text-primary">Register here</a>
+        · <a href="/" class="font-bold underline text-primary">Home</a>
+    </p>
+</div>
+
+</body>
+</html>
