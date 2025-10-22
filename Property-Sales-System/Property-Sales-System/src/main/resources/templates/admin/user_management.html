@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management | PropertyEase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f6fff8; font-family: 'Segoe UI', sans-serif; }
+        .container { margin-top: 80px; }
+        .btn-success, .bg-success, .text-success { background-color: #28a745 !important; border-color: #28a745 !important; }
+        .btn-success:hover { background-color: #218838 !important; }
+        .table-hover tbody tr:hover { background-color: #e9f7ec; }
+        .card { border-radius: 15px; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="admin.html">PropertyEase Admin</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4 text-success text-center">👥 User Management</h2>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a href="admin.html" class="btn btn-outline-secondary">← Back to Dashboard</a>
+        <a href="user_form.html" class="btn btn-success">➕ Add User</a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>AdminUser</td>
+                    <td>admin@propertyease.com</td>
+                    <td>ADMIN</td>
+                    <td>
+                        <a href="user_form.html" class="btn btn-sm btn-info">Edit</a>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>JohnDoe</td>
+                    <td>john@example.com</td>
+                    <td>USER</td>
+                    <td>
+                        <a href="user_form.html" class="btn btn-sm btn-info">Edit</a>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Settings | PropertyEase</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { background-color: #f6fff8; font-family: 'Segoe UI', sans-serif; }
+    .container { margin-top: 100px; max-width: 700px; }
+    .btn-success { background-color: #28a745; border-color: #28a745; }
+    .btn-success:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="admin.html">⚙️ PropertyEase Admin</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 class="mb-4 text-success text-center">⚙️ System Settings</h2>
+  <a href="admin.html" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+  <form>
+    <div class="form-group mb-3">
+      <label>System Name</label>
+      <input type="text" class="form-control" value="PropertyEase">
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Admin Email</label>
+      <input type="email" class="form-control" value="admin@propertyease.com">
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Maintenance Mode</label>
+      <select class="form-control">
+        <option>Off</option>
+        <option>On</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Theme</label>
+      <select class="form-control">
+        <option>Light</option>
+        <option>Dark</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">💾 Save Settings</button>
+  </form>
+</div>
+</body>
+</html>
