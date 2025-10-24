@@ -5,18 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ViewController {
-    @GetMapping("/")
+
+    @GetMapping("/register")
     public String register() {
-        return "feedback-list";
+        return "register";
     }
 
-    @GetMapping("/create")
-    public String login() {
-        return "create";
-    }
-
-    @GetMapping("/edit")
-    public String edit() {
-        return "edit";
-    }
 }

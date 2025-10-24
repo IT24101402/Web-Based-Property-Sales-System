@@ -32,22 +32,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register/**", "/login",
-                                "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(
+                                "/", "/feedback", "feedback/create", "/create", "/api/feedback/**",
+                                "/register/**", "/login", "/error", "/homePage/**",
+                                "/css/**", "/js/**", "/images/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/dashboard", false)
                         .permitAll()
                 )
                 .logout(l -> l.logoutSuccessUrl("/").permitAll());
-        // CSRF is enabled by default (kept ON)
-
+        http.exceptionHandling(e -> e.authenticationEntryPoint(
+                (request, response, authException) -> {
+                    System.out.println("🔒 Blocked URL: " + request.getRequestURI());
+                    response.sendRedirect("/login");
+                }
+        ));
         return http.build();
     }
 }

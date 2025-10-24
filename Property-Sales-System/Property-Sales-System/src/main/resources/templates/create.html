@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,95 +179,6 @@
             background-color: #ffebee;
         }
 
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .popup-overlay.show {
-            display: flex;
-        }
-
-        .popup {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 400px;
-            animation: slideUp 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .popup-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            color: white;
-        }
-
-        .popup h2 {
-            color: #2e7d32;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-
-        .popup p {
-            color: #616161;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .popup-btn {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .popup-btn:hover {
-            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
         @media (max-width: 768px) {
             .form-container {
                 padding: 25px;
@@ -291,10 +202,13 @@
     </div>
 
     <div class="form-container">
-        <form id="feedbackForm">
+        <!--  Correct Thymeleaf binding -->
+        <form th:action="@{/feedback/create}" th:object="${feedback}" method="post">
+
+            <!-- USER ROLE -->
             <div class="form-group">
-                <label for="userRole">User Role <span class="required">*</span></label>
-                <select id="userRole" name="userRole" required>
+                <label for="role">User Role <span class="required">*</span></label>
+                <select id="role" name="role" th:field="*{role}" required>
                     <option value="">Select your role</option>
                     <option value="buyer">Buyer</option>
                     <option value="tenant">Tenant</option>
@@ -305,9 +219,10 @@
                 <span class="error-message" id="roleError">Please select your role</span>
             </div>
 
+            <!-- FEEDBACK TYPE -->
             <div class="form-group">
-                <label for="feedbackType">Feedback Type <span class="required">*</span></label>
-                <select id="feedbackType" name="feedbackType" required>
+                <label for="type">Feedback Type <span class="required">*</span></label>
+                <select id="type" name="type" th:field="*{type}" required>
                     <option value="">Select feedback type</option>
                     <option value="general">General Feedback</option>
                     <option value="property">Property Listing Issue</option>
@@ -320,18 +235,21 @@
                 <span class="error-message" id="typeError">Please select feedback type</span>
             </div>
 
+            <!-- SUBJECT -->
             <div class="form-group">
                 <label for="subject">Subject <span class="required">*</span></label>
-                <input type="text" id="subject" name="subject" placeholder="Brief summary of your feedback" required>
+                <input type="text" id="subject" th:field="*{subject}" required>
                 <span class="error-message" id="subjectError">Please enter a subject</span>
             </div>
 
+            <!-- DESCRIPTION -->
             <div class="form-group">
                 <label for="description">Comment/Description <span class="required">*</span></label>
-                <textarea id="description" name="description" placeholder="Please provide detailed feedback..." required></textarea>
+                <textarea id="description" th:field="*{description}" required></textarea>
                 <span class="error-message" id="descriptionError">Please enter your feedback details</span>
             </div>
 
+            <!-- RATING -->
             <div class="form-group">
                 <label>Overall Rating <span class="required">*</span></label>
                 <div class="star-rating" id="starRating">
@@ -341,13 +259,14 @@
                     <i class="fa-regular fa-star star" data-rating="4"></i>
                     <i class="fa-regular fa-star star" data-rating="5"></i>
                 </div>
-                <input type="hidden" id="rating" name="rating" value="0">
+                <input type="hidden" id="rating" th:field="*{rating}" value="0">
                 <span class="error-message" id="ratingError">Please provide a rating</span>
             </div>
 
+            <!-- CONSENT -->
             <div class="form-group">
                 <div class="checkbox-group">
-                    <input type="checkbox" id="consent" name="consent" required>
+                    <input type="checkbox" id="consent" required>
                     <label for="consent">I agree to the collection and processing of this feedback. <span class="required">*</span></label>
                 </div>
                 <span class="error-message" id="consentError">You must agree to continue</span>
@@ -358,17 +277,19 @@
     </div>
 </div>
 
-<div class="popup-overlay" id="popupOverlay">
-    <div class="popup">
-        <div class="popup-icon">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <h2>Thank You!</h2>
-        <p>Your feedback has been submitted successfully. We appreciate your input and will use it to improve PropertEase.</p>
-        <button class="popup-btn" onclick="closePopup()">Close</button>
-    </div>
-</div>
-
-<script src="/js/create.js"></script>
+<script>
+    // ⭐ simple JS to handle star ratings
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = star.getAttribute('data-rating');
+            ratingInput.value = rating;
+            stars.forEach(s => s.classList.remove('active'));
+            star.classList.add('active');
+            for (let i = 0; i < rating; i++) stars[i].classList.add('active');
+        });
+    });
+</script>
 </body>
 </html>

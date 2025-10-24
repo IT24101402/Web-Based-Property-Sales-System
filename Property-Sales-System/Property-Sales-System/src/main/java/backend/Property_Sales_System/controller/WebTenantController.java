@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebTenantController {
 
-    @GetMapping({"/", "/tenants"})
+    @GetMapping({ "/tenants"})
     public String dashboard() {
         // must match a file under src/main/resources/templates/
         return "Tenant_Management_Dashboard";

@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.Repository.LeaseRepository;
 import backend.Property_Sales_System.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class LeaseServiceImpl implements LeaseService {
+public class LeaseServiceImpl implements backend.Property_Sales_System.Service.LeaseService {
 
     private final LeaseRepository leaseRepository;
 

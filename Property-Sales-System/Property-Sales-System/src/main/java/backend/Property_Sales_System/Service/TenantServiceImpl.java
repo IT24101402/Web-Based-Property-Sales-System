@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.Repository.TenantRepository;
 import backend.Property_Sales_System.dto.TenantRequest;
@@ -6,6 +6,7 @@ import backend.Property_Sales_System.dto.TenantResponse;
 import backend.Property_Sales_System.exception.ResourceNotFoundException;
 import backend.Property_Sales_System.model.Tenant;
 import backend.Property_Sales_System.model.TenantStatus;
+import backend.Property_Sales_System.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

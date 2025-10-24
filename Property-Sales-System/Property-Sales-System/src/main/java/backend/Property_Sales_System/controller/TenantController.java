@@ -3,7 +3,7 @@ package backend.Property_Sales_System.controller;
 import backend.Property_Sales_System.dto.TenantRequest;
 import backend.Property_Sales_System.dto.TenantResponse;
 import backend.Property_Sales_System.model.TenantStatus;
-import backend.Property_Sales_System.Service.TenantService;
+import backend.Property_Sales_System.service.TenantService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
