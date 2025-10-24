@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add / Edit User | PropertyEase</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { background-color: #f6fff8; font-family: 'Segoe UI', sans-serif; }
+    .container { margin-top: 100px; max-width: 600px; }
+    .btn-success { background-color: #28a745; border-color: #28a745; }
+    .btn-success:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="admin.html">PropertyEase Admin</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 class="mb-4 text-success text-center">👤 User Form</h2>
+  <a href="users.html" class="btn btn-outline-secondary mb-3">← Back to Users</a>
+
+  <form>
+    <div class="form-group mb-3">
+      <label>User ID</label>
+      <input type="text" class="form-control" placeholder="Auto-generated" disabled>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Username</label>
+      <input type="text" class="form-control" placeholder="Enter username">
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" placeholder="Enter email">
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Role</label>
+      <select class="form-control">
+        <option>USER</option>
+        <option>ADMIN</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Password</label>
+      <input type="password" class="form-control" placeholder="Enter password">
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">💾 Save User</button>
+  </form>
+</div>
+</body>
+</html>

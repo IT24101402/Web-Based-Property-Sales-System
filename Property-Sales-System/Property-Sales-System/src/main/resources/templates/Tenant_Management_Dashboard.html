@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PropertEase Dashboard</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/"/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800" onload="this.rel='stylesheet'">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = { darkMode: "class", theme: { extend: {
+                    colors: { "primary": "#10B981", "background-light": "#f7fafc", "background-dark": "#1a202c" },
+                    fontFamily: { "display": ["Manrope"] },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" }
+                } } }
+    </script>
+    <style>.disabled{opacity:.5;pointer-events:none}</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative min-h-screen">
+    <header class="bg-white/30 dark:bg-background-dark/30 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 sticky top-0 z-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <svg class="h-8 w-8 text-primary" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"/></svg>
+                    <h1 class="text-xl font-bold text-slate-900 dark:text-white">PropertEase</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary" href="#">Properties</a>
+                    <a class="text-sm font-medium text-primary font-semibold" href="/tenants">Tenant Management</a>
+                    <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary" href="#">Settings</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Tenant Management</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-1">Dashboard for Property Owners</p>
+            </div>
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="relative flex-grow">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input id="searchInput" class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/70 dark:bg-background-dark/70 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-primary" placeholder="Search tenants..." type="text"/>
+                </div>
+                <select id="statusFilter" class="rounded-lg border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-background-dark/70 py-2 px-3">
+                    <option value="">All statuses</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
+                    <option value="PENDING">Pending</option>
+                </select>
+                <a href="/tenants/add" class="flex items-center gap-2 bg-primary text-white font-semibold px-4 py-2 rounded-lg hover:bg-primary/90">
+                    <span class="material-symbols-outlined">add</span><span>Add Tenant</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white/70 dark:bg-background-dark/70 rounded-xl shadow-lg overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50/70 dark:bg-slate-900/50 text-xs text-slate-500 uppercase">
+                <tr>
+                    <th class="px-6 py-3 text-left">Tenant</th>
+                    <th class="px-6 py-3 text-left">Contact</th>
+                    <th class="px-6 py-3 text-left">Address</th>
+                    <th class="px-6 py-3 text-left">Move-in</th>
+                    <th class="px-6 py-3 text-left">Status</th>
+                    <th class="px-6 py-3"></th>
+                </tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-slate-200/50 dark:divide-slate-800/50"></tbody>
+            </table>
+        </div>
+
+        <div class="flex items-center justify-between mt-4">
+            <p id="pageInfo" class="text-sm text-slate-500"></p>
+            <div class="flex gap-2">
+                <button id="prevBtn" class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700">Prev</button>
+                <button id="nextBtn" class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700">Next</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const API_BASE = '/api/tenants';
+    let page = 0, size = 10, totalPages = 0, q = '', status = '';
+
+    const $ = (id)=>document.getElementById(id);
+    const tableBody = $('tableBody');
+    const pageInfo = $('pageInfo');
+    const prevBtn = $('prevBtn');
+    const nextBtn = $('nextBtn');
+
+    $('searchInput').addEventListener('input', (e)=>{ q = e.target.value.trim(); page=0; load(); });
+    $('statusFilter').addEventListener('change', (e)=>{ status = e.target.value; page=0; load(); });
+    prevBtn.addEventListener('click', ()=>{ if(page>0){ page--; load(); }});
+    nextBtn.addEventListener('click', ()=>{ if(page+1<totalPages){ page++; load(); }});
+
+    function badgeClass(s){
+        return s==='ACTIVE' ? 'bg-green-100 text-green-700'
+            : s==='PENDING' ? 'bg-yellow-100 text-yellow-700'
+                : 'bg-slate-200 text-slate-700';
+    }
+    function safe(v, fallback='-'){ return (v===null||v===undefined||v==='') ? fallback : v; }
+    function fullName(t){ return [t.firstName, t.lastName].filter(Boolean).join(' ') || '-'; }
+    function address(t){
+        const parts = [t.addressLine1, t.city, t.state, t.postalCode].filter(Boolean);
+        return parts.length ? parts.join(', ') : '-';
+    }
+
+    async function load(){
+        try{
+            const params = new URLSearchParams({ page, size });
+            if(q) params.append('q', q);
+            if(status) params.append('status', status);
+            const res = await fetch(`${API_BASE}?${params.toString()}`);
+            if(!res.ok) throw new Error('Failed to load tenants');
+            const data = await res.json(); // Page<TenantResponse>
+            totalPages = data.totalPages ?? 0;
+
+            tableBody.innerHTML = '';
+            (data.content||[]).forEach(t=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td class="px-6 py-4">
+            <div class="font-medium text-slate-900 dark:text-white">${fullName(t)}</div>
+          </td>
+          <td class="px-6 py-4 text-slate-600">
+            <div class="space-y-0.5">
+              <div>${safe(t.email,'-')}</div>
+              <div class="text-slate-500">${safe(t.phone,'')}</div>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-slate-600">${address(t)}</td>
+          <td class="px-6 py-4 text-slate-600">${safe(t.moveInDate,'-')}</td>
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 inline-flex text-xs font-semibold rounded-full ${badgeClass(t.status)}">${safe(t.status,'-')}</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center gap-4 justify-end">
+              <a href="/tenants/edit?id=${t.id}" class="text-slate-500 hover:text-primary"><span class="material-symbols-outlined text-base">edit</span></a>
+              <a href="/tenants/delete?id=${t.id}" class="text-slate-500 hover:text-red-500"><span class="material-symbols-outlined text-base">delete</span></a>
+            </div>
+          </td>`;
+                tableBody.appendChild(tr);
+            });
+
+            const current = (data.number ?? page) + 1;
+            pageInfo.textContent = `Page ${current} of ${data.totalPages ?? 1} • ${data.totalElements ?? 0} tenant(s)`;
+            prevBtn.classList.toggle('disabled', page===0);
+            nextBtn.classList.toggle('disabled', page+1>=totalPages);
+        }catch(err){
+            console.error(err);
+            tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-6 text-center text-red-600">Failed to load tenants.</td></tr>`;
+        }
+    }
+
+    load();
+</script>
+</body></html>

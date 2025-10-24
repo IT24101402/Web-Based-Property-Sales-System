@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Edit Tenant</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/"/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                    colors: {
+                        "primary": "#22c55e","primary-dark": "#16a34a",
+                        "background-light": "#f6f7f8","background-dark": "#101922",
+                        "foreground-light": "#111418","foreground-dark": "#f6f7f8",
+                        "border-light": "#dbe0e6","border-dark": "#2a3643",
+                        "secondary-light": "#617589","secondary-dark": "#a0b3c6"
+                    },
+                    fontFamily: { "display": ["Manrope","sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.5rem","lg": "0.75rem","xl": "1rem","full": "9999px" }
+                } }
+        }
+    </script>
+    <style>
+        .form-input{outline:2px solid transparent;outline-offset:2px}
+        .form-input:focus{
+            --tw-ring-color: theme(colors.primary);
+            box-shadow: 0 0 0 1px var(--tw-ring-color);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display bg-cover bg-center"
+      style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.0.3')">
+<div class="p-4">
+    <a href="/tenants" class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary">
+        <span class="material-symbols-outlined text-base">arrow_back</span> Back to Dashboard
+    </a>
+</div>
+
+<div class="flex items-center justify-center min-h-[85vh] p-4 bg-black/30 backdrop-blur-sm">
+    <div class="w-full max-w-3xl bg-white/85 dark:bg-background-dark/85 backdrop-blur-md rounded-xl shadow-lg border border-border-light dark:border-border-dark">
+        <div class="p-6 sm:p-8">
+            <div class="flex justify-between items-start mb-6">
+                <h1 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark">Edit Tenant</h1>
+                <a href="/tenants" class="text-secondary-light dark:text-secondary-dark hover:text-foreground-light dark:hover:text-foreground-dark">
+                    <span class="material-symbols-outlined">close</span>
+                </a>
+            </div>
+
+            <form id="editForm" class="space-y-8">
+                <!-- Basic Info -->
+                <section class="space-y-4">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-300">Basic Information</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="firstName">First Name</label>
+                            <input id="firstName" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text" required/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="lastName">Last Name</label>
+                            <input id="lastName" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text" required/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="email">Email</label>
+                            <input id="email" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="email" required/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="phone">Phone</label>
+                            <input id="phone" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="tel" required/>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="nationalId">National ID</label>
+                            <input id="nationalId" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="dateOfBirth">Date of Birth</label>
+                            <input id="dateOfBirth" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="date"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="status">Status</label>
+                            <select id="status" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg">
+                                <option value="PENDING">Pending</option>
+                                <option value="ACTIVE">Active</option>
+                                <option value="INACTIVE">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Address -->
+                <section class="space-y-4">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-300">Address</h3>
+                    <div class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="addressLine1">Address Line</label>
+                            <input id="addressLine1" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text"/>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium" for="city">City</label>
+                                <input id="city" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text"/>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium" for="state">State/Province</label>
+                                <input id="state" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text"/>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium" for="postalCode">Postal Code</label>
+                                <input id="postalCode" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tenancy -->
+                <section class="space-y-4">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-300">Tenancy</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium" for="moveInDate">Move-in Date</label>
+                            <input id="moveInDate" class="form-input w-full h-12 px-4 bg-background-light/70 dark:bg-background-dark/70 border border-border-light dark:border-border-dark rounded-lg" type="date"/>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="msg" class="text-sm"></div>
+            </form>
+        </div>
+
+        <div class="bg-background-light/50 dark:bg-gray-800/50 px-6 sm:px-8 py-4 flex justify-end items-center gap-4 rounded-b-xl">
+            <a href="/tenants" class="px-6 py-2.5 rounded-lg text-sm font-semibold text-secondary-light dark:text-secondary-dark bg-background-light dark:bg-background-dark/50 border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-700/50">Cancel</a>
+            <button id="saveBtn" form="editForm" class="px-6 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary-dark">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_BASE = '/api/tenants';
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const msg = document.getElementById('msg');
+    const saveBtn = document.getElementById('saveBtn');
+
+    function showMsg(text, ok=false){
+        msg.className = 'text-sm ' + (ok ? 'text-green-700' : 'text-red-600');
+        msg.textContent = text;
+    }
+
+    if(!id){
+        showMsg('Missing tenant id in URL.');
+        saveBtn.disabled = true;
+    } else {
+        loadTenant();
+    }
+
+    async function loadTenant(){
+        try{
+            const res = await fetch(`${API_BASE}/${id}`);
+            if(!res.ok) throw new Error('Failed to load tenant.');
+            const t = await res.json();
+
+            // Fill fields
+            document.getElementById('firstName').value   = t.firstName || '';
+            document.getElementById('lastName').value    = t.lastName || '';
+            document.getElementById('email').value       = t.email || '';
+            document.getElementById('phone').value       = t.phone || '';
+            document.getElementById('nationalId').value  = t.nationalId || '';
+            document.getElementById('dateOfBirth').value = t.dateOfBirth || '';
+            document.getElementById('addressLine1').value= t.addressLine1 || '';
+            document.getElementById('city').value        = t.city || '';
+            document.getElementById('state').value       = t.state || '';
+            document.getElementById('postalCode').value  = t.postalCode || '';
+            document.getElementById('moveInDate').value  = t.moveInDate || '';
+            document.getElementById('status').value      = t.status || 'PENDING';
+        }catch(err){
+            showMsg(err.message);
+        }
+    }
+
+    document.getElementById('editForm').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+
+        const payload = {
+            firstName:     document.getElementById('firstName').value.trim(),
+            lastName:      document.getElementById('lastName').value.trim(),
+            email:         document.getElementById('email').value.trim(),
+            phone:         document.getElementById('phone').value.trim(),
+            nationalId:    document.getElementById('nationalId').value.trim() || null,
+            dateOfBirth:   document.getElementById('dateOfBirth').value || null,
+            addressLine1:  document.getElementById('addressLine1').value.trim() || null,
+            city:          document.getElementById('city').value.trim() || null,
+            state:         document.getElementById('state').value.trim() || null,
+            postalCode:    document.getElementById('postalCode').value.trim() || null,
+            moveInDate:    document.getElementById('moveInDate').value || null,
+            status:        document.getElementById('status').value || 'PENDING'
+        };
+
+        if(!payload.firstName || !payload.lastName){ return showMsg('First and last name are required.'); }
+        if(!payload.email){ return showMsg('Email is required.'); }
+        if(!payload.phone){ return showMsg('Phone is required.'); }
+
+        try{
+            saveBtn.disabled = true;
+            const res = await fetch(`${API_BASE}/${id}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            if(!res.ok){
+                const text = await res.text();
+                throw new Error(text || 'Failed to update tenant.');
+            }
+            showMsg('Saved. Redirecting...', true);
+            setTimeout(()=>{ location.href='/tenants'; }, 600);
+        }catch(err){
+            showMsg(err.message);
+            saveBtn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

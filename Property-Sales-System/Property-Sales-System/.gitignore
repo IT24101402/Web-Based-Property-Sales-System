@@ -1,33 +1,103 @@
-HELP.md
+# ============================================================
+# FRONTEND (HTML, Tailwind, JS, JSP)
+# ============================================================
+ 
+# dependencies
+node_modules/
+ 
+# build outputs
+dist/
+build/
+.parcel-cache/
+ 
+# environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+ 
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+ 
+# testing
+coverage/
+ 
+# cache
+.eslintcache
+ 
+# editor files
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+ 
+# jsp/servlet build outputs (for frontend using JSP)
+*.class
+*.war
+*.jar
+*.ear
+out/
+*.log
+ 
+# ============================================================
+# BACKEND (Spring Boot – Maven / Gradle)
+# ============================================================
+ 
+# Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
+!.mvn/wrapper/maven-wrapper.properties
+ 
+# Gradle
+.gradle/
+build/
+ 
+# environment & configuration
+application-*.yml
+application-*.properties
+ 
+# logs & temp
+logs/
+*.log
+*.tmp
+*.swp
+ 
+# ============================================================
+# IDE / OS FILES
+# ============================================================
+ 
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+ 
+# Eclipse / STS
+.project
+.classpath
+.settings/
+.springBeans
+.sts4-cache/
+.apt_generated/
+ 
+# Visual Studio Code
 .vscode/
+ 
+# macOS / Windows
+.DS_Store
+Thumbs.db
+ 
+# ============================================================
+# OTHER
+# ============================================================
+ 
+# backup files
+*.bak
+*.old
+*.orig
+
