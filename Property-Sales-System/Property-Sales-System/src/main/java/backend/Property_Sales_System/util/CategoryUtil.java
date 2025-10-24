@@ -1,6 +1,6 @@
 package backend.Property_Sales_System.util;
 
-import PropertyManagment.propertyease.backend.model.Category;
+import backend.Property_Sales_System.model.Category;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,6 +8,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility for reading/writing categories from a JSON file.
+ */
 public class CategoryUtil {
 
     private static final String FILE_PATH = "categories.json";

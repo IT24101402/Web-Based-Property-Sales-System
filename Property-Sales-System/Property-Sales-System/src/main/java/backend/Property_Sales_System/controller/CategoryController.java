@@ -1,53 +1,73 @@
 package backend.Property_Sales_System.controller;
 
-import PropertyManagment.propertyease.backend.model.Category;
-import PropertyManagment.util.CategoryUtil;
+import backend.Property_Sales_System.model.Category;
+import backend.Property_Sales_System.util.CategoryUtil;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for managing Category entities.
+ * Stores and retrieves category data from a local JSON file.
+ */
 @RestController
-@RequestMapping("/categories")
-@CrossOrigin
+@RequestMapping("/api/categories")
+@CrossOrigin(origins = "*")
 public class CategoryController {
 
+    /**
+     * Get all categories.
+     */
     @GetMapping
-    public List<Category> getAll() {
+    public List<Category> getAllCategories() {
         return CategoryUtil.loadCategories();
     }
 
+    /**
+     * Add a new category.
+     */
     @PostMapping
-    public String add(@RequestBody Category category) {
-        List<Category> list = CategoryUtil.loadCategories();
-        int newId = list.isEmpty() ? 1 : list.get(list.size()-1).getId() + 1;
-        category.setId(newId);
-        list.add(category);
-        CategoryUtil.saveCategories(list);
-        return "Category added";
+    public List<Category> addCategory(@RequestBody Category newCategory) {
+        List<Category> categories = CategoryUtil.loadCategories();
+        if (categories == null) categories = new ArrayList<>();
+
+        // Auto-generate ID (simple local implementation)
+        int nextId = categories.stream()
+                .mapToInt(Category::getId)
+                .max()
+                .orElse(0) + 1;
+        newCategory.setId(nextId);
+
+        categories.add(newCategory);
+        CategoryUtil.saveCategories(categories);
+        return categories;
     }
 
+    /**
+     * Update an existing category by ID.
+     */
     @PutMapping("/{id}")
-    public String update(@PathVariable int id, @RequestBody Category updated) {
-        List<Category> list = CategoryUtil.loadCategories();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() == id) {
-                updated.setId(id);
-                list.set(i, updated);
-                CategoryUtil.saveCategories(list);
-                return "Updated";
+    public List<Category> updateCategory(@PathVariable int id, @RequestBody Category updatedCategory) {
+        List<Category> categories = CategoryUtil.loadCategories();
+        for (Category c : categories) {
+            if (c.getId() == id) {
+                c.setName(updatedCategory.getName());
+                break;
             }
         }
-        return "Category not found";
+        CategoryUtil.saveCategories(categories);
+        return categories;
     }
 
+    /**
+     * Delete a category by ID.
+     */
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
-        List<Category> list = CategoryUtil.loadCategories();
-        boolean removed = list.removeIf(c -> c.getId() == id);
-        if (removed) {
-            CategoryUtil.saveCategories(list);
-            return "Deleted";
-        }
-        return "Category not found";
+    public List<Category> deleteCategory(@PathVariable int id) {
+        List<Category> categories = CategoryUtil.loadCategories();
+        categories.removeIf(c -> c.getId() == id);
+        CategoryUtil.saveCategories(categories);
+        return categories;
     }
 }

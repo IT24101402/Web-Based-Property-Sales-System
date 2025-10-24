@@ -1,14 +1,18 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
-import PropertyManagment.propertyease.backend.model.Property;
-import PropertyManagment.propertyease.backend.model.User;
-import PropertyManagment.propertyease.backend.repository.PropertyRepository;
-import PropertyManagment.propertyease.backend.repository.UserRepository;
+import backend.Property_Sales_System.model.Property;
+import backend.Property_Sales_System.model.User;
+import backend.Property_Sales_System.repositories.PropertyRepository;
+import backend.Property_Sales_System.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * AdminService
+ * Handles admin-level operations such as managing users and properties.
+ */
 @Service
 public class AdminService {
 
@@ -31,8 +35,13 @@ public class AdminService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found for this id: " + id));
 
-        user.setName(userDetails.getName());
+        user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
+        user.setRole(userDetails.getRole());
+        user.setStreet(userDetails.getStreet());
+        user.setCity(userDetails.getCity());
+        user.setDistrict(userDetails.getDistrict());
+        user.setStatus(userDetails.getStatus());
 
         return userRepository.save(user);
     }
@@ -49,6 +58,4 @@ public class AdminService {
     public void deleteProperty(Long id) {
         propertyRepository.deleteById(id);
     }
-
-    // You'd typically add logic for 'System Setting' management here
 }

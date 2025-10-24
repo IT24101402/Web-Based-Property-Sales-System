@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for handling user profile display and updates.
+ */
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
@@ -20,17 +23,21 @@ public class ProfileController {
         this.userService = userService;
     }
 
+    /** ✅ Display the logged-in user's profile */
     @GetMapping
     public String showProfile(Model model, Authentication authentication) {
-        User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
         model.addAttribute("user", user);
-        return "profiles_logins_registers/profile"; // adjust to your folder
+        return "profiles_logins_registers/profile";
     }
 
+    /** ✅ Handle profile update submissions */
     @PostMapping
     public String updateProfile(@ModelAttribute User updatedUser, Authentication authentication) {
-        User current = userRepository.findByEmail(authentication.getName()).orElseThrow();
-        userService.updateProfile(current, updatedUser);  // <-- encodes if new password provided
+        User current = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userService.updateProfile(current, updatedUser);
         return "redirect:/dashboard";
     }
 }

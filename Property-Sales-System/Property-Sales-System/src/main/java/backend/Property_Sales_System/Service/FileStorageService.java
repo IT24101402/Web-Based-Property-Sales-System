@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
