@@ -1,6 +1,6 @@
-package backend.Property_Sales_System.controllers;
+package backend.Property_Sales_System.controller;
 
-import backend.Property_Sales_System.services.FileStorageService;
+import backend.Property_Sales_System.service.FileStorageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

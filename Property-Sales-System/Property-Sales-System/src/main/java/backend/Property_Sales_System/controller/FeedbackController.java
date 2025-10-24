@@ -1,7 +1,7 @@
-package backend.Property_Sales_System.controllers;
+package backend.Property_Sales_System.controller;
 
-import backend.Property_Sales_System.models.FeedbackModel;
-import backend.Property_Sales_System.services.FeedbackService;
+import backend.Property_Sales_System.model.FeedbackModel;
+import backend.Property_Sales_System.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

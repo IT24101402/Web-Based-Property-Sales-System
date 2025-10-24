@@ -1,7 +1,7 @@
-package backend.Property_Sales_System.services;
+package backend.Property_Sales_System.service;
 
-import backend.Property_Sales_System.models.FeedbackModel;
-import backend.Property_Sales_System.repositories.FeedbackRepository;
+import backend.Property_Sales_System.model.FeedbackModel;
+import backend.Property_Sales_System.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
