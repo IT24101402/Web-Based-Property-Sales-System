@@ -1,7 +1,7 @@
 package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.model.Property;
-import backend.Property_Sales_System.repository.PropertyRepository;
+import backend.Property_Sales_System.repositories.PropertyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
