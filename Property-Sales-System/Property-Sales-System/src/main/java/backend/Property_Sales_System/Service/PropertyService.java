@@ -1,13 +1,30 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
-import PropertyManagment.propertyease.backend.model.Property;
+import backend.Property_Sales_System.model.Property;
+import backend.Property_Sales_System.repository.PropertyRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface PropertyService {
-    List<Property> getAllProperties();
-    Optional<Property> getPropertyById(Long id);
-    Property saveProperty(Property property);
-    void deleteProperty(Long id);
+@Service
+public class PropertyService {
+    private final PropertyRepository repo;
+
+    public PropertyService(PropertyRepository repo) {
+        this.repo = repo;
+    }
+
+    public List<Property> getAll() { return repo.findAll(); }
+    public Property save(Property p) { return repo.save(p); }
+    public Property getById(Long id) { return repo.findById(id).orElse(null); }
+    public void delete(Long id) { repo.deleteById(id); }
+
+    // Search methods
+    public List<Property> searchByCity(String city) {
+        return repo.findByCityContainingIgnoreCase(city);
+    }
+
+    public List<Property> searchByDistrict(String district) {
+        return repo.findByDistrictContainingIgnoreCase(district);
+    }
 }
