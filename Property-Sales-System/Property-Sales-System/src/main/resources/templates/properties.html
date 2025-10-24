@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Property Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/properties">
+            <i class="fa fa-building"></i> PropertEase
+        </a>
+        <div>
+            <a href="/properties/new" class="btn btn-success">
+                <i class="fa fa-plus"></i> Add Property
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- FLASH MESSAGES -->
+    <div th:if="${successMsg}" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <i class="fa fa-check"></i> <span th:text="${successMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${errorMsg}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <i class="fa fa-exclamation"></i> <span th:text="${errorMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- SEARCH CARD -->
+    <div class="card shadow-lg border-0 mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fa fa-search"></i> Search Properties</h5>
+        </div>
+        <div class="card-body">
+            <form class="row g-3 mt-2" th:action="@{/properties/search}" method="get">
+                <div class="col-md-3">
+                    <input type="text" name="city" th:value="${searchCity}" placeholder="City" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="district" th:value="${searchDistrict}" placeholder="District" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <select name="type" class="form-select" th:value="${searchType}">
+                        <option value="">All Types</option>
+                        <option value="House">House</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Land">Land</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="minPrice" th:value="${searchMinPrice}" placeholder="Min Price" step="0.01" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="maxPrice" th:value="${searchMaxPrice}" placeholder="Max Price" step="0.01" class="form-control">
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary me-2"><i class="fa fa-search"></i> Search</button>
+                    <a href="/properties" class="btn btn-secondary"><i class="fa fa-undo"></i> Reset</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PROPERTIES TABLE -->
+    <div class="card shadow-lg border-0">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fa fa-list"></i> Property Listings (<span th:text="${properties.size()}"></span>)</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Type</th>
+                        <th>Image</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="property : ${properties}">
+                        <td th:text="${property.id}"></td>
+                        <td>
+                            <strong th:text="${property.title}"></strong>
+                        </td>
+                        <td>
+                            <span th:text="${property.street}"></span><br>
+                            <small class="text-muted">
+                                <i class="fa fa-map-marker"></i>
+                                <span th:text="${property.city + ', ' + property.district}"></span>
+                            </small>
+                        </td>
+                        <td>
+                            <strong class="text-success">
+                                $<span th:text="${#numbers.formatDecimal(property.price, 1, 2)}"></span>
+                            </strong>
+                        </td>
+                        <td>
+                            <span class="badge bg-success" th:text="${property.propertyType}"></span>
+                        </td>
+                        <td>
+                            <img th:src="${property.imageUrl} ?: '/images/default-property.jpg'"
+                                 class="img-thumbnail" style="width:80px;height:60px;"
+                                 alt="Property Image" th:onerror="this.src='/images/default-property.jpg'">
+                        </td>
+                        <td class="text-center">
+                            <a th:href="@{|/properties/edit/${property.id}|}" class="btn btn-warning btn-sm me-1">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a th:href="@{|/properties/delete/${property.id}|}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this property?');">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
