@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | PropertyEase</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { background-color: #f6fff8; font-family: 'Segoe UI', sans-serif; }
+    .container { margin-top: 80px; }
+    .card { border-radius: 15px; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .text-success { color: #28a745 !important; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="admin.html">PropertyEase Admin</a>
+  </div>
+</nav>
+
+<div class="container text-center">
+  <h1 class="mb-5 text-success">🔑 Administrator Dashboard</h1>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <a href="property_page.html" class="text-decoration-none text-dark">
+        <div class="card p-4 shadow">
+          <h3>🏠 Property Management</h3>
+          <p>View, add, and manage properties.</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="user_management.html" class="text-decoration-none text-dark">
+        <div class="card p-4 shadow">
+          <h3>👥 User Management</h3>
+          <p>Manage registered users and roles.</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="system_settings.html" class="text-decoration-none text-dark">
+        <div class="card p-4 shadow">
+          <h3>⚙️ System Settings</h3>
+          <p>Configure system parameters and preferences.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
