@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PropertEase - Add Tenant</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">:root{--primary-color:#16a34a;--primary-color-hover:#15803d}</style>
+    <script>
+        tailwind.config = { darkMode:"class", theme:{ extend:{ colors:{
+                        primary:"var(--primary-color)", "primary-hover":"var(--primary-color-hover)",
+                        "background-light":"#f0fdf4","background-dark":"#101922","foreground-light":"#111827","foreground-dark":"#f9fafb",
+                        "card-light":"#ffffff","card-dark":"#1b2734","input-light":"#ffffff","input-dark":"#1b2734",
+                        "input-border-light":"#d1d5db","input-border-dark":"#374151","placeholder-light":"#6b7280","placeholder-dark":"#9ca3af",
+                        "muted-light":"#6b7280","muted-dark":"#9ca3af","accent-light":"#f0fdf4","accent-dark":"#1f2937"} ,
+                    fontFamily:{display:["Manrope","sans-serif"]},
+                    borderRadius:{DEFAULT:"0.5rem",lg:"0.75rem",xl:"1rem",full:"9999px"} } } }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+<div class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-10 bg-card-light/80 dark:bg-card-dark/80 backdrop-blur-sm border-b border-input-border-light dark:border-input-border-dark">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <div class="text-primary">
+                        <svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    </div>
+                    <h1 class="text-xl font-bold">PropertEase</h1>
+                </div>
+                <a href="/tenants" class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary">
+                    <span class="material-symbols-outlined text-base">arrow_back</span> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-card-light dark:bg-card-dark rounded-lg shadow-lg">
+                <div class="p-6 border-b border-input-border-light dark:border-input-border-dark">
+                    <h2 class="text-2xl font-bold">Add Tenant</h2>
+                    <p class="text-muted-light dark:text-muted-dark mt-1">Only owners/admins can access.</p>
+                </div>
+
+                <form id="tenantForm" class="p-6 space-y-8">
+                    <!-- Name & Contact -->
+                    <section class="space-y-4">
+                        <h3 class="font-semibold">Basic Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="firstName">First Name</label>
+                                <input id="firstName" required class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="e.g. John" type="text"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="lastName">Last Name</label>
+                                <input id="lastName" required class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="e.g. Doe" type="text"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="email">Email</label>
+                                <input id="email" required class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="john.doe@example.com" type="email"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="phone">Phone</label>
+                                <input id="phone" required class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="+94 77 123 4567" type="tel"/>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="nationalId">National ID</label>
+                                <input id="nationalId" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="NIC / Passport" type="text"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="dateOfBirth">Date of Birth</label>
+                                <input id="dateOfBirth" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" type="date"/>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="status">Status</label>
+                                <select id="status" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark">
+                                    <option value="PENDING">Pending</option>
+                                    <option value="ACTIVE">Active</option>
+                                    <option value="INACTIVE">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Address -->
+                    <section class="space-y-4">
+                        <h3 class="font-semibold">Address</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="addressLine1">Address Line</label>
+                                <input id="addressLine1" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="No. 123, Street Name" type="text"/>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2" for="city">City</label>
+                                    <input id="city" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="Colombo" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2" for="state">State/Province</label>
+                                    <input id="state" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="Western" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2" for="postalCode">Postal Code</label>
+                                    <input id="postalCode" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" placeholder="00100" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Move-in -->
+                    <section class="space-y-4">
+                        <h3 class="font-semibold">Tenancy</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2" for="moveInDate">Move-in Date</label>
+                                <input id="moveInDate" class="block w-full rounded-lg border-input-border-light dark:border-input-border-dark bg-input-light dark:bg-input-dark" type="date"/>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div id="msg" class="text-sm"></div>
+                </form>
+
+                <div class="flex justify-end gap-4 p-6 bg-accent-light dark:bg-accent-dark/50 rounded-b-lg">
+                    <a href="/tenants" class="px-4 py-2 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500">Cancel</a>
+                    <button form="tenantForm" class="px-4 py-2 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-hover" type="submit">Add Tenant</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const API_BASE = '/api/tenants';
+    const msg = document.getElementById('msg');
+
+    function showMsg(text, ok=false){
+        msg.className = 'text-sm ' + (ok ? 'text-green-700' : 'text-red-600');
+        msg.textContent = text;
+    }
+
+    document.getElementById('tenantForm').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        msg.textContent = '';
+
+        const payload = {
+            firstName: document.getElementById('firstName').value.trim(),
+            lastName: document.getElementById('lastName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            nationalId: document.getElementById('nationalId').value.trim() || null,
+            dateOfBirth: document.getElementById('dateOfBirth').value || null,   // yyyy-MM-dd
+            addressLine1: document.getElementById('addressLine1').value.trim() || null,
+            city: document.getElementById('city').value.trim() || null,
+            state: document.getElementById('state').value.trim() || null,
+            postalCode: document.getElementById('postalCode').value.trim() || null,
+            moveInDate: document.getElementById('moveInDate').value || null,     // yyyy-MM-dd
+            status: document.getElementById('status').value || 'PENDING'
+        };
+
+        // simple client-side checks mirroring @NotBlank/@Email
+        if(!payload.firstName || !payload.lastName){ return showMsg('First and last name are required.'); }
+        if(!payload.email){ return showMsg('Email is required.'); }
+        if(!payload.phone){ return showMsg('Phone is required.'); }
+
+        try{
+            const res = await fetch(API_BASE, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(payload)
+            });
+            if(!res.ok){
+                // surface Bean Validation messages if backend returns them in body
+                const text = await res.text();
+                throw new Error(text || 'Failed to create tenant');
+            }
+            await res.json();
+            showMsg('Tenant created successfully. Redirecting...', true);
+            setTimeout(()=>{ window.location.href = '/tenants'; }, 700);
+        }catch(err){
+            // Unique email violation or validation errors end up here
+            showMsg(err.message);
+        }
+    });
+</script>
+</body></html>

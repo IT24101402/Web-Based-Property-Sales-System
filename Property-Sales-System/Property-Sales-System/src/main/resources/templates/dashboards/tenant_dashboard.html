@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tenant Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2E8B57",
+                "background-light": "#f3f8f3",
+                "background-dark": "#112111",
+                "accent": "#F5F5F5",
+                "text-dark": "#333333",
+                "text-light": "#F5F5F5"
+              },
+              fontFamily: { "display": ["Manrope", "sans-serif"] },
+              borderRadius: { "DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px" },
+            },
+          },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24 }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-dark dark:text-text-light">
+<div class="flex min-h-screen flex-col">
+
+    <div class="flex flex-1">
+        <!-- Sidebar -->
+        <div class="w-64 bg-background-light dark:bg-background-dark p-4 flex flex-col justify-between shadow-md">
+            <div>
+                <div class="flex flex-col gap-2 mb-8">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20" href="#">
+                        <span class="material-symbols-outlined text-primary">home</span>
+                        <p class="text-primary text-sm font-medium leading-normal">Home</p>
+                    </a>
+
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" th:href="@{/profile}">
+                        <span class="material-symbols-outlined text-text-dark dark:text-text-light">person</span>
+                        <p class="text-text-dark dark:text-text-light text-sm font-medium leading-normal">Profile</p>
+                    </a>
+
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" href="#">
+                        <span class="material-symbols-outlined text-text-dark dark:text-text-light">apartment</span>
+                        <p class="text-text-dark dark:text-text-light text-sm font-medium leading-normal">My Rentals</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <form th:action="@{/logout}" method="post" class="mt-4">
+                <input type="hidden" th:if="${_csrf != null}"
+                       th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <button type="submit" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10">
+                    <span class="material-symbols-outlined text-text-dark dark:text-text-light">logout</span>
+                    <span class="text-text-dark dark:text-text-light text-sm font-medium leading-normal">Logout</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 bg-accent dark:bg-gray-800">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Header with username + role -->
+                <div class="flex justify-between items-center mb-8">
+                    <p class="text-text-dark dark:text-text-light text-4xl font-black leading-tight tracking-[-0.033em]">
+                        My Rented Properties
+                    </p>
+                    <!--  Show logged in username + role -->
+                    <div class="text-right">
+                        <p class="text-text-dark dark:text-text-light text-base font-medium"
+                           th:text="${#authentication.name}">Username</p>
+                        <p class="text-primary text-sm font-normal"
+                           th:text="${#authentication.authorities[0].authority}">ROLE_USER</p>
+                    </div>
+                </div>
+
+                <!-- Properties -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div class="flex flex-col rounded-xl bg-background-light dark:bg-background-dark shadow-lg overflow-hidden">
+                        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover"
+                             style='background-image: url("https://picsum.photos/id/1018/600/400");'></div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <p class="text-text-dark dark:text-text-light text-lg font-bold leading-tight">123 Main Street, Apt 4B</p>
+                            <p class="text-primary text-sm mt-1">Lease Start: 01/01/2024 Lease End: 12/31/2024</p>
+                            <p class="text-text-dark/80 dark:text-text-light/80 text-sm mt-1">Rent: $2,500/month</p>
+                            <div class="mt-auto pt-4">
+                                <button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm hover:bg-primary/90">
+                                    <span class="truncate">View Details</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flex flex-col rounded-xl bg-background-light dark:bg-background-dark shadow-lg overflow-hidden">
+                        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover"
+                             style='background-image: url("https://picsum.photos/id/1015/600/400");'></div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <p class="text-text-dark dark:text-text-light text-lg font-bold leading-tight">456 Oak Avenue</p>
+                            <p class="text-primary text-sm mt-1">Lease Start: 03/15/2023 Lease End: 03/14/2025</p>
+                            <p class="text-text-dark/80 dark:text-text-light/80 text-sm mt-1">Rent: $3,200/month</p>
+                            <div class="mt-auto pt-4">
+                                <button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-white text-sm hover:bg-primary/90">
+                                    <span class="truncate">View Details</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment History -->
+                <h2 class="text-text-dark dark:text-text-light text-[22px] font-bold leading-tight pt-12 pb-4">
+                    Recent Payment History
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark shadow-md">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-accent dark:bg-gray-800">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-dark/70 uppercase">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-dark/70 uppercase">Property</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-dark/70 uppercase">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-dark/70 uppercase">Status</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-background-light dark:bg-background-dark divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">05/01/2024</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">123 Main Street, Apt 4B</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">$2,500</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="inline-flex px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">Paid</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">03/01/2024</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">123 Main Street, Apt 4B</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">$2,500</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="inline-flex px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">Pending</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!--  Footer -->
+    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-700 py-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-sm text-text-dark dark:text-text-light">
+            <p>&copy; 2025 Property Sales System. All rights reserved.</p>
+            <div class="flex gap-4 mt-2 sm:mt-0">
+                <a href="#" class="hover:text-primary">Privacy Policy</a>
+                <a href="#" class="hover:text-primary">Terms of Service</a>
+                <a href="#" class="hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
