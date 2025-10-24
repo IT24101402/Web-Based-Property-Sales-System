@@ -1,7 +1,6 @@
 package backend.Property_Sales_System.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,34 +14,29 @@ public class MaintenanceRequest {
     @Column(nullable = false, length = 500)
     private String issue;
 
-    // ✅ CORRECT MAPPING: Uses the Property object to manage the foreign key.
-    // The @JoinColumn(name = "property_id") maps to the physical database column.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
-    // Assuming a relationship to a User who reported the issue
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requested_by_user_id", nullable = false)
     private User requestedBy;
 
     @Column(nullable = false)
-    private String status; // E.g., "Reported", "In Progress", "Completed"
+    private String status = "Reported"; // default
 
     @Column(updatable = false)
     private LocalDateTime dateReported = LocalDateTime.now();
 
-    // ----------------------
-    // Constructors (Optional, but good practice)
-    // ----------------------
-
-    public MaintenanceRequest() {
+    // Constructors
+    public MaintenanceRequest() {}
+    public MaintenanceRequest(String issue, Property property, User requestedBy) {
+        this.issue = issue;
+        this.property = property;
+        this.requestedBy = requestedBy;
     }
 
-    // ----------------------
     // Getters and Setters
-    // ----------------------
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -1,7 +1,7 @@
 package backend.Property_Sales_System.controller;
 
 import backend.Property_Sales_System.model.User;
-import backend.Property_Sales_System.repository.UserRepository;
+import backend.Property_Sales_System.repositories.UserRepository;
 import backend.Property_Sales_System.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.models;
+package backend.Property_Sales_System.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

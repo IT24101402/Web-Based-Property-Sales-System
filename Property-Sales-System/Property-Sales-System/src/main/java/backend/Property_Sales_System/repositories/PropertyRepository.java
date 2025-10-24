@@ -1,10 +1,10 @@
 package backend.Property_Sales_System.repositories;
 
-import PropertyManagment.propertyease.backend.model.Property;
+import backend.Property_Sales_System.model.Property;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
 public interface PropertyRepository extends JpaRepository<Property, Long> {
-    // Spring Data JPA provides all standard CRUD methods automatically.
+    List<Property> findByCityContainingIgnoreCase(String city);
+    List<Property> findByDistrictContainingIgnoreCase(String district);
 }

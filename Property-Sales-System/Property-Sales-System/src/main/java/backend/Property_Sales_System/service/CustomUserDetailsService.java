@@ -1,7 +1,7 @@
 package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.model.User;
-import backend.Property_Sales_System.repository.UserRepository;
+import backend.Property_Sales_System.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

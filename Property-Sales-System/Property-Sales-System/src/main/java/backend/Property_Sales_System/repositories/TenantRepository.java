@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Repository;
+package backend.Property_Sales_System.repositories;
 
 import backend.Property_Sales_System.model.Tenant;
 import backend.Property_Sales_System.model.TenantStatus;

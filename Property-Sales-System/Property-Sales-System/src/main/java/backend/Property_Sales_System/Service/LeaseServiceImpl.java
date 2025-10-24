@@ -1,6 +1,6 @@
 package backend.Property_Sales_System.service;
 
-import backend.Property_Sales_System.Repository.LeaseRepository;
+import backend.Property_Sales_System.repositories.LeaseRepository;
 import backend.Property_Sales_System.exception.ResourceNotFoundException;
 import backend.Property_Sales_System.model.Lease;
 import backend.Property_Sales_System.model.LeaseStatus;
