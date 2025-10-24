@@ -1,21 +1,27 @@
 package backend.Property_Sales_System.util;
 
-import PropertyManagment.propertyease.backend.model.User;
+import backend.Property_Sales_System.model.User;
 
+/**
+ * Utility class providing helper methods for User entity.
+ */
 public class UserUtil {
 
-    // Example utility to get formatted user info
+    /**
+     * Returns formatted user info (Username + Email).
+     */
     public static String getUserInfo(User user) {
         if (user == null) {
             return "No user data available";
         }
 
-        // ✅ Use getName() instead of getUsername()
-        return "User Info: [Name: " + user.getName() +
+        return "User Info: [Username: " + user.getUsername() +
                 ", Email: " + user.getEmail() + "]";
     }
 
-    // Example: validate user email format
+    /**
+     * Validates the user's email format (basic check).
+     */
     public static boolean isValidEmail(User user) {
         if (user == null || user.getEmail() == null) {
             return false;
@@ -23,7 +29,9 @@ public class UserUtil {
         return user.getEmail().contains("@");
     }
 
-    // Example: mask user password (optional helper)
+    /**
+     * Returns a masked version of the user's password.
+     */
     public static String maskPassword(User user) {
         if (user == null || user.getPassword() == null) {
             return "";

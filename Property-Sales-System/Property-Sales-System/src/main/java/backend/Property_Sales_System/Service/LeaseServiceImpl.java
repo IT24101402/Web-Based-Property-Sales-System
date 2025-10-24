@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class LeaseServiceImpl implements backend.Property_Sales_System.Service.LeaseService {
+public class LeaseServiceImpl implements backend.Property_Sales_System.service.LeaseService {
 
     private final LeaseRepository leaseRepository;
 

@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.model.FeedbackModel;
 import backend.Property_Sales_System.repositories.FeedbackRepository;

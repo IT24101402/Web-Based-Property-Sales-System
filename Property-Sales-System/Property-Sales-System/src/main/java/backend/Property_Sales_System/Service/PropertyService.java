@@ -1,30 +1,43 @@
 package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.model.Property;
-import backend.Property_Sales_System.repositories.PropertyRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class PropertyService {
-    private final PropertyRepository repo;
+/**
+ * PropertyService
+ * Interface defining core CRUD operations for Property entities.
+ */
+public interface PropertyService {
 
-    public PropertyService(PropertyRepository repo) {
-        this.repo = repo;
-    }
+    /**
+     * Retrieve all properties.
+     */
+    List<Property> getAllProperties();
 
-    public List<Property> getAll() { return repo.findAll(); }
-    public Property save(Property p) { return repo.save(p); }
-    public Property getById(Long id) { return repo.findById(id).orElse(null); }
-    public void delete(Long id) { repo.deleteById(id); }
+    /**
+     * Retrieve a property by its ID.
+     */
+    Optional<Property> getPropertyById(Long id);
 
-    // Search methods
-    public List<Property> searchByCity(String city) {
-        return repo.findByCityContainingIgnoreCase(city);
-    }
+    /**
+     * Save or update a property.
+     */
+    Property saveProperty(Property property);
 
-    public List<Property> searchByDistrict(String district) {
-        return repo.findByDistrictContainingIgnoreCase(district);
-    }
+    /**
+     * Delete a property by ID.
+     */
+    void deleteProperty(Long id);
+
+    /**
+     * Search properties by city (case-insensitive match).
+     */
+    List<Property> searchByCity(String city);
+
+    /**
+     * Search properties by district (case-insensitive match).
+     */
+    List<Property> searchByDistrict(String district);
 }

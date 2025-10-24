@@ -1,6 +1,6 @@
 package backend.Property_Sales_System.controller;
 
-import backend.Property_Sales_System.Service.LeaseService; // <- this import must match the interface above
+import backend.Property_Sales_System.service.LeaseService; // <- this import must match the interface above
 import backend.Property_Sales_System.model.Lease;
 import backend.Property_Sales_System.model.LeaseStatus;
 import lombok.RequiredArgsConstructor;

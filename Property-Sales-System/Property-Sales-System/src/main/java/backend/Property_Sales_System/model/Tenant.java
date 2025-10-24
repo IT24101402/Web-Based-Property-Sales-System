@@ -7,12 +7,18 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tenants",
-        indexes = {
-                @Index(name = "idx_tenant_email", columnList = "email"),
-                @Index(name = "idx_tenant_name", columnList = "first_name,last_name")
-        })
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Table(
+    name = "tenants",
+    indexes = {
+        @Index(name = "idx_tenant_email", columnList = "email"),
+        @Index(name = "idx_tenant_name", columnList = "first_name,last_name")
+    }
+)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Tenant {
 
     @Id
@@ -27,7 +33,8 @@ public class Tenant {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Email @NotBlank(message = "Email is required")
+    @Email
+    @NotBlank(message = "Email is required")
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -46,7 +53,9 @@ public class Tenant {
 
     private LocalDate moveInDate;
 
+    // FIX: Mark this field with @Builder.Default so Lombok uses the default value in the builder
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private backend.Property_Sales_System.model.TenantStatus status = backend.Property_Sales_System.model.TenantStatus.PENDING;
+    private TenantStatus status = TenantStatus.PENDING;
 }

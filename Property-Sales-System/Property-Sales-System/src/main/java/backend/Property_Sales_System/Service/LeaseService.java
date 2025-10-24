@@ -1,4 +1,4 @@
-package backend.Property_Sales_System.Service;
+package backend.Property_Sales_System.service;
 
 import backend.Property_Sales_System.model.Lease;
 import backend.Property_Sales_System.model.LeaseStatus;

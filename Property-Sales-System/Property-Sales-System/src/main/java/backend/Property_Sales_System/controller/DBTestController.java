@@ -1,30 +1,35 @@
 package backend.Property_Sales_System.controller;
 
-import PropertyManagment.propertyease.backend.repository.UserRepository;
+import backend.Property_Sales_System.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * Simple controller to test database connectivity and UserRepository functionality.
+ */
 @RestController
-@RequestMapping("/api/test")
-@CrossOrigin("*") // allow frontend to call this
+@RequestMapping("/api/dbtest")
+@CrossOrigin(origins = "*")
 public class DBTestController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    // API to check DB connectivity
-    @GetMapping("/db")
-    public ResponseEntity<String> checkDB() {
+    @Autowired
+    public DBTestController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    /**
+     * Basic endpoint to verify database connection.
+     */
+    @GetMapping("/check")
+    public String checkDatabaseConnection() {
         try {
             long count = userRepository.count();
-            return ResponseEntity.ok("✅ Database Connected! Users count: " + count);
+            return "✅ Database connection successful! Total users: " + count;
         } catch (Exception e) {
-            return ResponseEntity.status(500)
-                    .body("❌ Database connection failed: " + e.getMessage());
+            e.printStackTrace();
+            return "❌ Database connection failed: " + e.getMessage();
         }
     }
 }
