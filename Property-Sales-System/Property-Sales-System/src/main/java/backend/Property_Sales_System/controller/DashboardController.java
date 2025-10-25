@@ -43,4 +43,8 @@ public class DashboardController {
             default       -> "redirect:/";
         };
     }
+    @GetMapping("/vendor/tenant-management")
+    public String showTenantManagementDashboard() {
+        return "Tenant_Management_Dashboard";
+    }
 }

@@ -13,9 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 import java.io.IOException;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
@@ -43,15 +46,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        // Allow public access for feedback pages and API
                         .requestMatchers(
-                                "/",
-                                "/edit.html", "/feedback-list.html",
+                                "/", "/edit.html", "/feedback-list.html",
                                 "/register/**", "/login", "/error", "/homePage/**",
                                 "/css/**", "/js/**", "/images/**", "/favicon.ico"
                         ).permitAll()
                         .requestMatchers("/feedback/**", "/api/feedback/**").authenticated()
-                        // everything else requires authentication
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -62,9 +62,11 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(l -> l
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")  // 🧩 KEY FIX: ensures the browser cookie is removed
                         .permitAll()
                 )
                 .sessionManagement(session -> session
@@ -75,7 +77,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /** ✅ Custom login redirect based on role */
+    /**  Role-based redirect after login */
     @Bean
     public SavedRequestAwareAuthenticationSuccessHandler roleBasedSuccessHandler() {
         return new SavedRequestAwareAuthenticationSuccessHandler() {
@@ -84,6 +86,7 @@ public class SecurityConfig {
                                                 HttpServletResponse response,
                                                 Authentication authentication)
                     throws IOException, ServletException {
+
                 String role = authentication.getAuthorities().iterator().next().getAuthority().toUpperCase();
 
                 switch (role) {

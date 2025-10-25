@@ -63,6 +63,15 @@
                         <span class="material-symbols-outlined text-text-dark dark:text-text-light">apartment</span>
                         <p class="text-text-dark dark:text-text-light text-sm font-medium leading-normal">My Listings</p>
                     </a>
+
+                    <!-- ✅ Tenant Records (fixed version) -->
+                    <!-- Tenant Records -->
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10"
+                       th:href="@{/vendor/tenant-management}"
+                       id="tenant-records-link">
+                        <span class="material-symbols-outlined text-text-dark dark:text-text-light">group</span>
+                        <p class="text-text-dark dark:text-text-light text-sm font-medium leading-normal">Tenant Records</p>
+                    </a>
                 </div>
             </div>
 
@@ -86,13 +95,13 @@
                         <!-- logged-in email -->
                         <p class="text-text-dark dark:text-text-light text-base font-medium"
                            th:text="${#authentication?.name}">vendor@example.com</p>
-                        <!-- first authority as role (e.g., ROLE_VENDOR); replace with your own if needed -->
+                        <!-- first authority as role -->
                         <p class="text-primary text-sm font-normal"
                            th:text="${#authentication?.authorities[0]?.authority}">VENDOR</p>
                     </div>
                 </div>
 
-                <!-- Metrics row (purely visual; no logic change) -->
+                <!-- Metrics row -->
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="rounded-xl bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
                         <div class="flex items-center justify-between">
@@ -122,11 +131,10 @@
                     </div>
                 </section>
 
-                <!-- My Listings (cards) -->
+                <!-- My Listings -->
                 <section id="my-listings" class="mt-12">
                     <h2 class="text-text-dark dark:text-text-light text-[22px] font-bold leading-tight pb-5">My Listings</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Card 1 -->
                         <div class="rounded-xl overflow-hidden bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 shadow-md">
                             <div class="w-full bg-center bg-no-repeat aspect-video bg-cover"
                                  style='background-image:url("https://picsum.photos/id/1025/600/400");'></div>
@@ -139,7 +147,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Card 2 -->
                         <div class="rounded-xl overflow-hidden bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 shadow-md">
                             <div class="w-full bg-center bg-no-repeat aspect-video bg-cover"
                                  style='background-image:url("https://picsum.photos/id/1005/600/400");'></div>
@@ -155,7 +162,7 @@
                     </div>
                 </section>
 
-                <!-- Recent Inquiries (table) -->
+                <!-- Recent Inquiries -->
                 <section class="mt-12">
                     <h2 class="text-text-dark dark:text-text-light text-[22px] font-bold leading-tight pb-4">Recent Inquiries</h2>
                     <div class="overflow-x-auto">
@@ -205,7 +212,7 @@
         </main>
     </div>
 
-    <!-- Footer (same style as tenant) -->
+    <!-- Footer -->
     <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-700 py-4">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-sm text-text-dark dark:text-text-light">
             <p>&copy; 2025 Property Sales System. All rights reserved.</p>
