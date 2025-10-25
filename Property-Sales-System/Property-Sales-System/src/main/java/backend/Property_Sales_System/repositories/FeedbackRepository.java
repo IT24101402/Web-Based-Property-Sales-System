@@ -11,6 +11,9 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<FeedbackModel, Long> {
+
+    // Find all feedback submitted by a specific user
+    List<FeedbackModel> findByUser_Id(Long userId);
     
     // Find feedback by role
     List<FeedbackModel> findByRole(String role);

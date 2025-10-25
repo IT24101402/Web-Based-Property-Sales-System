@@ -46,11 +46,11 @@ public class SecurityConfig {
                         // Allow public access for feedback pages and API
                         .requestMatchers(
                                 "/",
-                                "/feedback/**", "/api/feedback/**",
                                 "/edit.html", "/feedback-list.html",
                                 "/register/**", "/login", "/error", "/homePage/**",
                                 "/css/**", "/js/**", "/images/**", "/favicon.ico"
                         ).permitAll()
+                        .requestMatchers("/feedback/**", "/api/feedback/**").authenticated()
                         // everything else requires authentication
                         .anyRequest().authenticated()
                 )

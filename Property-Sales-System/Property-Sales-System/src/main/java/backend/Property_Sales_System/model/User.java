@@ -1,20 +1,17 @@
 package backend.Property_Sales_System.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(
-        name = "users",
-        uniqueConstraints = @UniqueConstraint(columnNames = "email")
-)
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
@@ -48,6 +45,7 @@ public class User {
     @Column(nullable = false)
     private Boolean status = true;
 
+    // ---------- Phones Relationship ----------
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserPhone> phones = new ArrayList<>();
 
@@ -58,7 +56,12 @@ public class User {
         phones.add(p);
     }
 
-    // Getters/setters
+    // ---------- Feedback Relationship ----------
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // ✅ Prevents recursion in JSON serialization
+    private List<FeedbackModel> feedbackList = new ArrayList<>();
+
+    // ---------- Getters and Setters ----------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -90,4 +93,7 @@ public class User {
 
     public List<UserPhone> getPhones() { return phones; }
     public void setPhones(List<UserPhone> phones) { this.phones = phones; }
+
+    public List<FeedbackModel> getFeedbackList() { return feedbackList; }
+    public void setFeedbackList(List<FeedbackModel> feedbackList) { this.feedbackList = feedbackList; }
 }
