@@ -34,22 +34,35 @@ public class Property {
 
     @NotBlank(message = "Property type is required")
     private String propertyType;
+@Column(nullable = true)
+private String vendorEmail;
 
+public String getVendorEmail() {
+    return vendorEmail;
+}
+
+public void setVendorEmail(String vendorEmail) {
+    this.vendorEmail = vendorEmail;
+}
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
     private String imageUrl;
-
     private String address;
 
-    // Relationship to MaintenanceRequest
-    // 'property' here must match the field name in MaintenanceRequest.java
+    // ✅ Added fields
+    private Boolean isSold = false;
+    private Long buyerId;
+    private Long vendorId;  // <-- new
+
+    private boolean sold = false;
+    public boolean isSold() { return sold; }
+    public void setSold(boolean sold) { this.sold = sold; }
+    
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MaintenanceRequest> maintenanceRequests = new HashSet<>();
 
-    // ----------------------
-    // Getters and Setters
-    // ----------------------
+    // ---------------------- Getters & Setters ----------------------
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -81,11 +94,15 @@ public class Property {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public Set<MaintenanceRequest> getMaintenanceRequests() {
-        return maintenanceRequests;
-    }
+    public Boolean getIsSold() { return isSold; }
+    public void setIsSold(Boolean isSold) { this.isSold = isSold; }
 
-    public void setMaintenanceRequests(Set<MaintenanceRequest> maintenanceRequests) {
-        this.maintenanceRequests = maintenanceRequests;
-    }
+    public Long getBuyerId() { return buyerId; }
+    public void setBuyerId(Long buyerId) { this.buyerId = buyerId; }
+
+    public Long getVendorId() { return vendorId; }
+    public void setVendorId(Long vendorId) { this.vendorId = vendorId; }
+
+    public Set<MaintenanceRequest> getMaintenanceRequests() { return maintenanceRequests; }
+    public void setMaintenanceRequests(Set<MaintenanceRequest> maintenanceRequests) { this.maintenanceRequests = maintenanceRequests; }
 }

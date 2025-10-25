@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import java.io.IOException;
 
@@ -42,59 +42,56 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authenticationProvider(authenticationProvider())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/", "/edit.html", "/feedback-list.html",
-                                "/register/**", "/login", "/error", "/homePage/**",
-                                "/css/**", "/js/**", "/images/**", "/favicon.ico"
-                        ).permitAll()
-                        .requestMatchers("/feedback/**", "/api/feedback/**").authenticated()
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-                        .successHandler(roleBasedSuccessHandler())
-                        .permitAll()
-                )
-                .logout(l -> l
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID")  // 🧩 KEY FIX: ensures the browser cookie is removed
-                        .permitAll()
-                )
-                .sessionManagement(session -> session
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
-                );
-
+        http.csrf(csrf -> csrf.disable())
+            .authenticationProvider(authenticationProvider())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/", "/register/**", "/login", "/error",
+                    "/homePage/**", "/css/**", "/js/**",
+                    "/images/**", "/favicon.ico"
+                ).permitAll()
+                // Admin pages only for ADMIN
+                .requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .successHandler(roleBasedSuccessHandler())
+                .permitAll()
+            )
+            .logout(l -> l
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            );
         return http.build();
     }
 
-    /**  Role-based redirect after login */
+    /** 🔁 Role-based redirect after login */
     @Bean
     public SavedRequestAwareAuthenticationSuccessHandler roleBasedSuccessHandler() {
         return new SavedRequestAwareAuthenticationSuccessHandler() {
             @Override
-            public void onAuthenticationSuccess(HttpServletRequest request,
-                                                HttpServletResponse response,
-                                                Authentication authentication)
+            public void onAuthenticationSuccess(
+                    HttpServletRequest request,
+                    HttpServletResponse response,
+                    Authentication authentication)
                     throws IOException, ServletException {
 
-                String role = authentication.getAuthorities().iterator().next().getAuthority().toUpperCase();
+                String role = authentication.getAuthorities()
+                        .iterator().next().getAuthority().toUpperCase();
 
                 switch (role) {
-                    case "TENANT", "ROLE_TENANT" -> setDefaultTargetUrl("/tenant/dashboard");
+                    case "ADMIN", "ROLE_ADMIN" -> setDefaultTargetUrl("/admin/dashboard");
                     case "VENDOR", "ROLE_VENDOR" -> setDefaultTargetUrl("/vendor/dashboard");
                     case "BUYER", "ROLE_BUYER" -> setDefaultTargetUrl("/buyer/dashboard");
-                    case "ADMIN", "ROLE_ADMIN" -> setDefaultTargetUrl("/admin/dashboard");
-                    default -> setDefaultTargetUrl("/dashboard");
+                    case "TENANT", "ROLE_TENANT" -> setDefaultTargetUrl("/tenant/dashboard");
+                    default -> setDefaultTargetUrl("/");
                 }
                 super.onAuthenticationSuccess(request, response, authentication);
             }

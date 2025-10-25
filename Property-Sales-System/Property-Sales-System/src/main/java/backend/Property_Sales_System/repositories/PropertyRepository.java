@@ -7,4 +7,9 @@ import java.util.List;
 public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findByCityContainingIgnoreCase(String city);
     List<Property> findByDistrictContainingIgnoreCase(String district);
+    List<Property> findByIsSoldFalse();
+    List<Property> findByVendorEmail(String vendorEmail);
+
+    // ✅ New query for vendor properties
+    List<Property> findByVendorId(Long vendorId);
 }

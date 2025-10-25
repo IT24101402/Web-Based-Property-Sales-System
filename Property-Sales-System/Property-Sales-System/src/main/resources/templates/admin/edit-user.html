@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit User | Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-[Manrope] text-gray-800">
+<div class="max-w-lg mx-auto py-10 px-6 bg-white shadow-md rounded-xl mt-12">
+
+  <h1 class="text-2xl font-bold text-green-800 mb-6 text-center">Edit User</h1>
+
+  <form th:action="@{'/admin/users/edit/' + ${user.id}}" th:object="${user}" method="post" class="space-y-4">
+    <div>
+      <label class="block font-semibold mb-1">Username</label>
+      <input type="text" th:field="*{username}" class="w-full border rounded-lg p-2" required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Email</label>
+      <input type="email" th:field="*{email}" class="w-full border rounded-lg p-2" required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Role</label>
+      <select th:field="*{role}" class="w-full border rounded-lg p-2">
+        <option value="buyer">Buyer</option>
+        <option value="vendor">Vendor</option>
+        <option value="tenant">Tenant</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Status</label>
+      <select th:field="*{status}" class="w-full border rounded-lg p-2">
+        <option value="true" th:selected="${user.status}">Active</option>
+        <option value="false" th:selected="${!user.status}">Inactive</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">New Password (optional)</label>
+      <input type="password" th:field="*{password}" class="w-full border rounded-lg p-2">
+    </div>
+
+    <div class="text-center mt-6">
+      <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800">Save Changes</button>
+      <a href="/admin/users" class="ml-4 text-gray-700 hover:text-gray-900">Cancel</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

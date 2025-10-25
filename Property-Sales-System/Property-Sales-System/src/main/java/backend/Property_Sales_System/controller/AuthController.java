@@ -97,19 +97,23 @@ public class AuthController {
         return "dashboards/buyer_dashboard";
     }
 
-    @GetMapping("/vendor/dashboard")
-    public String vendorDashboard() {
-        return "dashboards/vendor_dashboard";
-    }
-
+    // @GetMapping("/vendor/dashboard")
+    // public String vendorDashboardRedirect() {
+    //     return "redirect:/vendor/dashboard"; // handled by VendorController now
+    // }
+    
     @GetMapping("/tenant/dashboard")
     public String tenantDashboard() {
         return "dashboards/tenant_dashboard";
     }
-
-    // OPTIONAL: in case you add admin later
-    @GetMapping("/admin/dashboard")
-    public String adminDashboard() {
-        return "dashboards/admin_dashboard"; // make sure you have this template if admins exist
-    }
+    // @GetMapping("/admin/dashboard")
+    // public String adminDashboard() {
+    //     return "admin/dashboard";   // loads templates/admin/dashboard.html
+    // }
+    
+    // // OPTIONAL: in case you add admin later
+    // @GetMapping("/admin/dashboard")
+    // public String adminDashboard() {
+    //     return "dashboards/admin_dashboard"; // make sure you have this template if admins exist
+    // }
 }

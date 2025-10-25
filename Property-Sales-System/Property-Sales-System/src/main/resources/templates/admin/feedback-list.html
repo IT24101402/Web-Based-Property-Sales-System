@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedbacks | Admin</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+  <script>tailwind.config={theme:{extend:{colors:{primary:"#2E8B57"}}}}</script>
+</head>
+<body class="font-display bg-[#edf5ed] text-gray-800">
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white p-4 shadow-md">
+    <nav class="space-y-2">
+      <a href="/admin/dashboard" class="block py-2">🏠 Dashboard</a>
+      <a href="/admin/users" class="block py-2">👤 Users</a>
+      <a href="/admin/feedbacks" class="block py-2 bg-primary/10 rounded font-semibold">💬 Feedbacks</a>
+      <a href="/admin/properties" class="block py-2">🏘 Properties</a>
+      <a href="/admin/payments" class="block py-2">💳 Payments</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-8">
+    <h1 class="text-2xl font-bold mb-6">User Feedbacks</h1>
+
+    <!-- Filters -->
+    <form method="get" class="flex gap-4 mb-6 flex-wrap">
+      <select name="role" class="rounded border-gray-300" onchange="this.form.submit()">
+        <option value="all" th:selected="${selectedRole=='all'}">All Roles</option>
+        <option value="buyer" th:selected="${selectedRole=='buyer'}">Buyer</option>
+        <option value="vendor" th:selected="${selectedRole=='vendor'}">Vendor</option>
+        <option value="tenant" th:selected="${selectedRole=='tenant'}">Tenant</option>
+      </select>
+
+      <select name="rating" class="rounded border-gray-300" onchange="this.form.submit()">
+        <option value="">All Ratings</option>
+        <option th:each="r:${#numbers.sequence(1,5)}"
+                th:value="${r}" th:text="'⭐ '+r"
+                th:selected="${selectedRating==r}"></option>
+      </select>
+      <button class="bg-primary text-white px-4 py-2 rounded">Filter</button>
+    </form>
+
+    <!-- Table -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full">
+        <thead class="bg-primary text-white">
+        <tr>
+          <th class="px-4 py-2 text-left">User</th>
+          <th class="px-4 py-2 text-left">Role</th>
+          <th class="px-4 py-2 text-left">Type</th>
+          <th class="px-4 py-2 text-left">Subject</th>
+          <th class="px-4 py-2 text-left">Rating</th>
+          <th class="px-4 py-2 text-left">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="f:${feedbacks}" class="border-b hover:bg-gray-50">
+          <td class="px-4 py-2" th:text="${f.user!=null?f.user.username:'—'}"></td>
+          <td class="px-4 py-2 capitalize" th:text="${f.role}"></td>
+          <td class="px-4 py-2" th:text="${f.type}"></td>
+          <td class="px-4 py-2" th:text="${f.subject}"></td>
+          <td class="px-4 py-2 text-yellow-600" th:text="${'⭐ '+f.rating}"></td>
+          <td class="px-4 py-2" th:text="${f.date}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</body>
+</html>

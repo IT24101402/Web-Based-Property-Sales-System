@@ -16,7 +16,7 @@
                 "background-light": "#f3f8f3",
                 "background-dark": "#112111",
                 "accent": "#F5F5F5",
-                "text-dark": "#333333"",   /* pure black for light mode */
+                "text-dark": "#333333",   /* pure black for light mode */
                 "text-light": "#F5F5F5"   /* keep this for dark mode */
               },
               fontFamily: { "display": ["Manrope", "sans-serif"] },
@@ -52,6 +52,19 @@
                 <span class="material-symbols-outlined">person</span>
                 <p class="text-sm font-medium">Profile</p>
             </a>
+            <!-- Insert inside <nav> under existing Dashboard/Profile links -->
+            <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-surface-light dark:hover:bg-surface-dark"
+            href="/buyer/properties">
+            <span class="material-symbols-outlined">home_work</span>
+            <p class="text-sm font-medium">Properties</p>
+            </a>
+            <!-- View Payments -->
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-surface-light dark:hover:bg-surface-dark"
+href="/buyer/payments">
+<span class="material-symbols-outlined">credit_card</span>
+<p class="text-sm font-medium">Payment History</p>
+</a>
+
         </nav>
 
         <!-- Logout button (fixed to actually work) -->

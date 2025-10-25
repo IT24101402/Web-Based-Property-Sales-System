@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Payments | PropertEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-[Manrope] text-gray-800">
+<div class="max-w-6xl mx-auto py-10 px-6">
+
+  <h1 class="text-3xl font-bold text-green-800 mb-6">My Payments</h1>
+
+  <div th:if="${error}" class="bg-red-100 text-red-700 p-4 rounded mb-4" th:text="${error}"></div>
+
+  <table class="w-full border-collapse bg-white shadow-md rounded-xl overflow-hidden">
+    <thead class="bg-green-700 text-white">
+      <tr>
+        <th class="p-3 text-left">Property</th>
+        <th class="p-3 text-left">Amount</th>
+        <th class="p-3 text-left">Method</th>
+        <th class="p-3 text-left">Date</th>
+        <th class="p-3 text-left">Status</th>
+        <th class="p-3 text-left">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="p : ${payments}" class="border-b hover:bg-green-50">
+        <td class="p-3" th:text="${p.property != null ? p.property.title : '—'}">Property Name</td>
+        <td class="p-3" th:text="${'$' + p.amount}">$0.00</td>
+        <td class="p-3" th:text="${p.method}">Card</td>
+        <td class="p-3" th:text="${p.date}">2025-10-26</td>
+        <td class="p-3">
+          <span th:text="${p.status}"
+                th:classappend="${
+                    p.status != null ?
+                        (p.status.name() == 'PAID' ? ' text-green-600 font-semibold' :
+                        (p.status.name() == 'PENDING' ? ' text-yellow-600 font-semibold' : ' text-red-600 font-semibold'))
+                    : ' text-gray-500'
+                }">
+          </span>
+        </td>
+        <td class="p-3" th:text="${p.notes != null ? p.notes : '—'}">—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-6 text-center">
+    <a href="/dashboards/buyer_dashboard.html"
+       class="inline-block bg-green-700 text-white px-5 py-2 rounded-lg hover:bg-green-800 transition">
+      ← Back to Dashboard
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

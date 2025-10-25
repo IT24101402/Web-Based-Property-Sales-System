@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Confirmation | PropertEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #e9f5ee 30%, #f9fdfb 70%);
+            color: #1b4332;
+        }
+        header {
+            background: linear-gradient(90deg, #2d6a4f, #52b788);
+            padding: 40px 20px;
+            color: #fff;
+            text-align: center;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        .confirmation-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 60px 45px;
+            max-width: 750px;
+            margin: 70px auto;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .icon-success {
+            background: #52b788;
+            color: white;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            box-shadow: 0 8px 20px rgba(82,183,136,0.4);
+        }
+        h2 {
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1rem;
+            color: #333;
+        }
+        .summary {
+            margin-top: 25px;
+            background: #f8fdfb;
+            border: 1px solid #cce3d6;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: left;
+        }
+        .summary p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #52b788, #40916c);
+            border: none;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 12px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(82,183,136,0.4);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><i class="fa-solid fa-building-columns"></i> PropertEase</h1>
+</header>
+
+<div class="confirmation-box">
+    <div class="icon-success mb-3">
+        <i class="fa-solid fa-check"></i>
+    </div>
+    <h2>Payment Successful!</h2>
+    <p>Your payment has been processed successfully. The property is now marked as sold.</p>
+
+    <!-- ✅ Payment Summary -->
+    <div class="summary mt-4">
+        <h5 class="fw-bold mb-2"><i class="fa-solid fa-receipt text-success"></i> Payment Summary</h5>
+        <p><strong>Amount Paid:</strong> $<span th:text="${payment != null ? payment.amount : 'N/A'}"></span></p>
+        <p><strong>Payment Method:</strong> <span th:text="${payment != null ? payment.method : 'N/A'}"></span></p>
+        <p><strong>Date:</strong> <span th:text="${payment != null ? payment.date : 'N/A'}"></span></p>
+    </div>
+
+    <div class="mt-4">
+        <a href="/properties" class="btn btn-primary me-2">
+            <i class="fa-solid fa-home"></i> Back to Properties
+        </a>
+        <a href="/payments" class="btn btn-outline-success border-2">
+            <i class="fa-solid fa-list"></i> View Payments
+        </a>
+    </div>
+</div>
+
+<footer class="text-center mt-5 text-muted">
+    © 2025 PropertEase | Smart Property Management
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
