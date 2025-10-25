@@ -21,7 +21,7 @@ public class AdminController {
     @Autowired private PaymentRepository paymentRepository;
     @Autowired private PaymentService paymentService;
 
-    /** 🏠 Dashboard */
+    /**  Dashboard */
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("userCount", userService.getAllUsers().size());
@@ -31,7 +31,7 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-    /** 👤 Users list */
+    /**  Users list */
     @GetMapping("/users")
     public String listUsers(@RequestParam(required = false) String role,
                             @RequestParam(required = false) String search,
@@ -56,7 +56,7 @@ public class AdminController {
         return "admin/user-list";
     }
 
-    /** ✏️ Edit user (GET form) */
+    /**  Edit user (GET form) */
     @GetMapping("/users/edit/{id}")
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.getAllUsers()
@@ -68,7 +68,7 @@ public class AdminController {
         return "admin/edit-user";
     }
 
-    /** 💾 Update user (POST submit) */
+    /**  Update user (POST submit) */
     @PostMapping("/users/edit/{id}")
     public String updateUser(@PathVariable Long id, @ModelAttribute User updatedUser) {
         User current = userService.getAllUsers()
@@ -81,14 +81,14 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-    /** ❌ Delete user */
+    /**  Delete user */
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/admin/users";
     }
 
-    /** 💬 Feedbacks list */
+    /**  Feedbacks list */
     @GetMapping("/feedbacks")
     public String feedbacks(@RequestParam(required = false) String role,
                             @RequestParam(required = false) Integer rating,
@@ -113,7 +113,7 @@ public class AdminController {
         return "admin/feedback-list";
     }
 
-    /** 🏘 Properties list */
+    /**  Properties list */
     @GetMapping("/properties")
     public String properties(@RequestParam(required = false) String city,
                              @RequestParam(required = false) String district,
@@ -138,7 +138,7 @@ public class AdminController {
         return "admin/property_page";
     }
 
-    /** 💳 Payments list + edit/delete (already implemented) */
+    /**  Payments list + edit/delete (already implemented) */
     @GetMapping("/payments")
     public String payments(@RequestParam(required = false) String status, Model model) {
         List<Payment> payments = paymentRepository.findAll();
