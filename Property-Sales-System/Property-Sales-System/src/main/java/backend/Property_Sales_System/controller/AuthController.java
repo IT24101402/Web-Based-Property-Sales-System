@@ -16,33 +16,40 @@ import java.util.Set;
 public class AuthController {
 
     private final UserService userService;
-    private static final Set<String> ALLOWED_ROLES = Set.of("buyer", "vendor", "tenant");
+    private static final Set<String> ALLOWED_ROLES = Set.of("buyer", "vendor", "tenant", "admin");
 
     public AuthController(UserService userService) {
         this.userService = userService;
     }
 
+    // Home page
     @GetMapping("/")
     public String home() {
-        return "homePage/index"; // <-- subfolder
+        return "homePage/index";
     }
 
+    // Login page
     @GetMapping("/login")
     public String login() {
-        return "profiles_logins_registers/login"; // <-- subfolder
+        return "profiles_logins_registers/login";
     }
 
+    // Show register form for buyer/vendor/tenant/admin
     @GetMapping("/register/{role}")
     public String showRegister(@PathVariable String role, Model model) {
         if (!ALLOWED_ROLES.contains(role)) return "redirect:/";
+
         User u = new User();
         u.setRole(role);
-        u.addPhone("");
+        u.addPhone(""); // one empty phone field for the form
+
         model.addAttribute("role", role);
         model.addAttribute("user", u);
-        return "profiles_logins_registers/register"; // <-- subfolder
+
+        return "profiles_logins_registers/register";
     }
 
+    // Handle registration submit
     @PostMapping("/register/{role}")
     public String register(
             @PathVariable String role,
@@ -51,16 +58,20 @@ public class AuthController {
             Model model
     ) {
         if (!ALLOWED_ROLES.contains(role)) return "redirect:/";
+
         user.setRole(role);
 
+        // If validation errors: re-render form
         if (result.hasErrors()) {
             model.addAttribute("role", role);
+
             if (user.getPhones() == null || user.getPhones().isEmpty()) {
                 user.addPhone("");
             }
-            return "profiles_logins_registers/register"; // stay here on error
+            return "profiles_logins_registers/register";
         }
 
+        // Clean/attach phones
         if (user.getPhones() != null) {
             Iterator<UserPhone> it = user.getPhones().iterator();
             while (it.hasNext()) {
@@ -73,16 +84,32 @@ public class AuthController {
             }
         }
 
+        // Save user (password will be encoded in UserService)
         userService.saveUser(user);
+
+        // After register, go to login
         return "redirect:/login";
     }
 
+    // Dashboards:
     @GetMapping("/buyer/dashboard")
-    public String buyerDashboard() { return "dashboards/buyer_dashboard"; }
+    public String buyerDashboard() {
+        return "dashboards/buyer_dashboard";
+    }
 
     @GetMapping("/vendor/dashboard")
-    public String vendorDashboard() { return "dashboards/vendor_dashboard"; }
+    public String vendorDashboard() {
+        return "dashboards/vendor_dashboard";
+    }
 
     @GetMapping("/tenant/dashboard")
-    public String tenantDashboard() { return "dashboards/tenant_dashboard"; }
+    public String tenantDashboard() {
+        return "dashboards/tenant_dashboard";
+    }
+
+    // OPTIONAL: in case you add admin later
+    @GetMapping("/admin/dashboard")
+    public String adminDashboard() {
+        return "dashboards/admin_dashboard"; // make sure you have this template if admins exist
+    }
 }

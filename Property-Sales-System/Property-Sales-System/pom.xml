@@ -26,7 +26,7 @@
 
     <dependencies>
 
-        <!--  Core Spring Boot -->
+        <!-- ✅ Core Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,7 +44,13 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!--  Database Drivers -->
+        <!-- ✅ Add this: for ${#authentication} and sec:authorize in Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+
+        <!-- ✅ Database Drivers -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -56,7 +62,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--  JSP / Jakarta support -->
+        <!-- ✅ JSP / Jakarta Support -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -67,7 +73,7 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
-        <!--  Utility & Support -->
+        <!-- ✅ Utility & Support -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -85,24 +91,25 @@
             <version>0.4</version>
         </dependency>
 
-        <!--  Testing -->
+        <!-- ✅ Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- ✅ Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--  Spring Security (required for authentication & authorization) -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
 
     </dependencies>
 
     <build>
         <plugins>
 
-            <!--  Compiler plugin with explicit Lombok version -->
+            <!-- ✅ Compiler plugin with Lombok -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -120,7 +127,7 @@
                 </configuration>
             </plugin>
 
-            <!--  Spring Boot build plugin -->
+            <!-- ✅ Spring Boot Build Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
