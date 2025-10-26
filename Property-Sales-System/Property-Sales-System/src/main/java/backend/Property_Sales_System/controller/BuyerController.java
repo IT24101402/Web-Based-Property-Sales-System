@@ -22,7 +22,7 @@ public class BuyerController {
         this.paymentRepository = paymentRepository;
     }
 
-    /** ✅ 1. Show available properties to buyer */
+    /**  1. Show available properties to buyer */
     @GetMapping("/properties")
     public String listAvailableProperties(Model model) {
         model.addAttribute("properties", propertyService.getAllProperties()
@@ -30,7 +30,7 @@ public class BuyerController {
         return "buyer_properties";
     }
 
-    /** ✅ 2. Buyer selects property to buy -> redirect to payment form */
+    /**  2. Buyer selects property to buy -> redirect to payment form */
     @GetMapping("/buy/{id}")
     public String buyProperty(@PathVariable Long id, Model model) {
         Property property = propertyService.getPropertyById(id)
@@ -40,7 +40,7 @@ public class BuyerController {
         return "payment/add-payment"; // reuse existing styled page
     }
 
-    /** ✅ 3. Buyer submits payment */
+    /**  3. Buyer submits payment */
     @PostMapping("/buy/{id}/payment")
     public String processPayment(@PathVariable Long id, @ModelAttribute Payment payment) {
         Property property = propertyService.getPropertyById(id)
@@ -62,7 +62,7 @@ public class BuyerController {
         return "redirect:/buyer/payment/confirm?pid=" + payment.getId();
     }
 
-    /** ✅ 4. Confirmation page */
+    /**  4. Confirmation page */
     @GetMapping("/payment/confirm")
     public String confirmPayment(@RequestParam("pid") Long paymentId, Model model) {
         Payment p = paymentRepository.findById(paymentId)

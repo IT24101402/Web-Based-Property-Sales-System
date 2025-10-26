@@ -21,7 +21,7 @@ public class Payment {
 
     private String notes;
 
-    // ✅ NEW FIELDS
+    //  NEW FIELDS
     private Long buyerId;        // logged-in buyer
     private String buyerEmail;   // for admin view
 

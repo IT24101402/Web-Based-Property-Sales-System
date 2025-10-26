@@ -72,7 +72,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /** 🔁 Role-based redirect after login */
+    /**  Role-based redirect after login */
     @Bean
     public SavedRequestAwareAuthenticationSuccessHandler roleBasedSuccessHandler() {
         return new SavedRequestAwareAuthenticationSuccessHandler() {

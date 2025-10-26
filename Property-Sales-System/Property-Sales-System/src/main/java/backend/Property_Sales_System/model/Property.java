@@ -50,7 +50,7 @@ public void setVendorEmail(String vendorEmail) {
     private String imageUrl;
     private String address;
 
-    // ✅ Added fields
+    //  Added fields
     private Boolean isSold = false;
     private Long buyerId;
     private Long vendorId;  // <-- new

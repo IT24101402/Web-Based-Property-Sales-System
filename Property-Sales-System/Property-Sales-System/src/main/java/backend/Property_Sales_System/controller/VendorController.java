@@ -19,7 +19,7 @@ public class VendorController {
         this.propertyService = propertyService;
     }
 
-    /** ✅ Vendor Dashboard (shows property list) */
+    /**  Vendor Dashboard (shows property list) */
     @GetMapping("/dashboard")
     public String vendorDashboard(Authentication auth, Model model) {
         Long vendorId = getLoggedUserId(auth);
@@ -32,7 +32,7 @@ public class VendorController {
         return "dashboards/vendor_dashboard";
     }
 
-    /** ✅ List vendor’s properties separately (optional dedicated view) */
+    /**  List vendor’s properties separately (optional dedicated view) */
     @GetMapping("/properties")
     public String listVendorProperties(Authentication auth, Model model) {
         Long vendorId = getLoggedUserId(auth);
@@ -42,14 +42,14 @@ public class VendorController {
         return "vendor_properties";
     }
 
-    /** ✅ Show Add Property form */
+    /**  Show Add Property form */
     @GetMapping("/properties/new")
     public String addPropertyForm(Model model) {
         model.addAttribute("property", new Property());
         return "vendor_property_form";
     }
 
-    /** ✅ Handle Add Property submission */
+    /**  Handle Add Property submission */
     @PostMapping("/properties")
     public String saveVendorProperty(@ModelAttribute Property property, Authentication auth) {
         property.setVendorId(getLoggedUserId(auth));

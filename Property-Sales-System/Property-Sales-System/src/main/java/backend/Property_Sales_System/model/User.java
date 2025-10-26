@@ -58,7 +58,7 @@ public class User {
 
     // ---------- Feedback Relationship ----------
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore // ✅ Prevents recursion in JSON serialization
+    @JsonIgnore //  Prevents recursion in JSON serialization
     private List<FeedbackModel> feedbackList = new ArrayList<>();
 
     // ---------- Getters and Setters ----------

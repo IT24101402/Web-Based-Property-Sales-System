@@ -17,7 +17,7 @@ public class FeedbackModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({"feedbackList", "phones", "password", "hibernateLazyInitializer", "handler"})
-    private User user; // ✅ Prevents recursive loading of feedbackList
+    private User user; //  Prevents recursive loading of feedbackList
 
     // --- Fields ---
     @NotBlank(message = "User role is required")

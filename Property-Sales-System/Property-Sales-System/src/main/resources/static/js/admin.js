@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ Admin dashboard loaded successfully");
+  console.log(" Admin dashboard loaded successfully");
 });

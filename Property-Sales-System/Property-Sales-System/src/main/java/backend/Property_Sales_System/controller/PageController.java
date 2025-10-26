@@ -23,32 +23,32 @@ public class PageController {
         this.paymentRepository = paymentRepository;
     }
 
-    /** ✅ Admin dashboard page */
+    /**  Admin dashboard page */
     @GetMapping("/admin")
     public String adminDashboard() {
         return "admin"; // templates/admin.html
     }
 
-    // /** ✅ Property management page */
+    // /**  Property management page */
     // @GetMapping("/admin/properties")
     // public String propertyPage(Model model) {
     //     model.addAttribute("properties", propertyService.getAllProperties());
     //     return "property_page"; // templates/property_page.html
     // }
 
-    // /** ✅ User management page */
+    // /**  User management page */
     // @GetMapping("/admin/users")
     // public String userManagementPage() {
     //     return "user_management"; // templates/user_management.html
     // }
 
-    /** ✅ System settings page */
+    /**  System settings page */
     @GetMapping("/admin/settings")
     public String systemSettingsPage() {
         return "system_settings"; // templates/system_settings.html
     }
 
-    // /** ✅ New: Payment listing page */
+    // /**  New: Payment listing page */
     // @GetMapping("/admin/payments")
     // public String paymentsPage(Model model) {
     //     List<Payment> payments = paymentRepository.findAll();

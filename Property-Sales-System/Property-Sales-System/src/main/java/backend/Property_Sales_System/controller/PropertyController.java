@@ -18,21 +18,21 @@ public class PropertyController {
         this.service = service;
     }
 
-    // ✅ List all properties
+    //  List all properties
     @GetMapping
     public String list(Model model) {
         model.addAttribute("properties", service.getAllProperties());
         return "properties";
     }
 
-    // ✅ Create new property form
+    //  Create new property form
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("property", new Property());
         return "property-form";
     }
 
-    // ✅ Save property (create or update)
+    //  Save property (create or update)
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute Property property,
                        BindingResult result,
@@ -45,21 +45,21 @@ public class PropertyController {
         return "redirect:/properties";
     }
 
-    // ✅ Edit property form
+    //  Edit property form
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("property", service.getPropertyById(id).orElse(null));
         return "property-form";
     }
 
-    // ✅ Delete property
+    //  Delete property
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         service.deleteProperty(id);
         return "redirect:/properties";
     }
 
-    // ✅ Search by city or district
+    //  Search by city or district
     @GetMapping("/search")
     public String search(@RequestParam(required = false) String city,
                          @RequestParam(required = false) String district,

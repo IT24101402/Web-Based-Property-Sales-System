@@ -26,10 +26,10 @@ public class DBTestController {
     public String checkDatabaseConnection() {
         try {
             long count = userRepository.count();
-            return "✅ Database connection successful! Total users: " + count;
+            return " Database connection successful! Total users: " + count;
         } catch (Exception e) {
             e.printStackTrace();
-            return "❌ Database connection failed: " + e.getMessage();
+            return " Database connection failed: " + e.getMessage();
         }
     }
 }

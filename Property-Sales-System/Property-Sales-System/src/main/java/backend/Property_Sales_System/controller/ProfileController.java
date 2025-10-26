@@ -23,7 +23,7 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    /** ✅ Display the logged-in user's profile */
+    /**  Display the logged-in user's profile */
     @GetMapping
     public String showProfile(Model model, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName())
@@ -32,7 +32,7 @@ public class ProfileController {
         return "profiles_logins_registers/profile";
     }
 
-    /** ✅ Handle profile update submissions */
+    /**  Handle profile update submissions */
     @PostMapping
     public String updateProfile(@ModelAttribute User updatedUser, Authentication authentication) {
         User current = userRepository.findByEmail(authentication.getName())

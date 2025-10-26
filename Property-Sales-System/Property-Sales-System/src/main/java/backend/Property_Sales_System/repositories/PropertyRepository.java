@@ -10,6 +10,6 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findByIsSoldFalse();
     List<Property> findByVendorEmail(String vendorEmail);
 
-    // ✅ New query for vendor properties
+    //  New query for vendor properties
     List<Property> findByVendorId(Long vendorId);
 }

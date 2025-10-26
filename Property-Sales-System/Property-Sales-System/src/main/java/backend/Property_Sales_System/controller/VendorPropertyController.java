@@ -19,7 +19,7 @@ public class VendorPropertyController {
         this.propertyService = propertyService;
     }
 
-    /** ✅ List properties belonging to the logged-in vendor */
+    /**  List properties belonging to the logged-in vendor */
     @GetMapping
     public String listVendorProperties(Authentication auth, Model model) {
         String vendorEmail = (auth != null) ? auth.getName() : "guest@example.com";
@@ -31,14 +31,14 @@ public class VendorPropertyController {
         return "dashboards/vendor_dashboard";   // points to vendor_dashboard.html
     }
 
-    /** ✅ Display add-new form */
+    /**  Display add-new form */
     @GetMapping("/new")
     public String newProperty(Model model) {
         model.addAttribute("property", new Property());
         return "vendor_property_form";
     }
 
-    /** ✅ Save or update property */
+    /**  Save or update property */
     @PostMapping("/save")
     public String saveProperty(@ModelAttribute Property property, Authentication auth) {
         if (auth != null) {
@@ -48,7 +48,7 @@ public class VendorPropertyController {
         return "redirect:/vendor/manage/properties";
     }
 
-    /** ✅ Edit existing property */
+    /**  Edit existing property */
     @GetMapping("/edit/{id}")
     public String editProperty(@PathVariable Long id, Model model) {
         Property property = propertyService.getPropertyById(id)
@@ -57,7 +57,7 @@ public class VendorPropertyController {
         return "vendor_property_form";
     }
 
-    /** ✅ Delete property */
+    /**  Delete property */
     @GetMapping("/delete/{id}")
     public String deleteProperty(@PathVariable Long id) {
         propertyService.deleteProperty(id);

@@ -23,7 +23,7 @@ public class FeedbackService {
         this.userRepository = userRepository;
     }
 
-    // ✅ Save feedback and attach logged-in user
+    //  Save feedback and attach logged-in user
     public FeedbackModel saveFeedback(FeedbackModel feedback, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));
@@ -35,7 +35,7 @@ public class FeedbackService {
         return feedbackRepository.save(feedback);
     }
 
-    // ✅ Get all feedback (ensures user info is loaded for JSON)
+    //  Get all feedback (ensures user info is loaded for JSON)
     public List<FeedbackModel> getAllFeedback() {
         List<FeedbackModel> feedbacks = feedbackRepository.findAll();
 
@@ -49,7 +49,7 @@ public class FeedbackService {
         return feedbacks;
     }
 
-    // ✅ Get feedback by user ID
+    //  Get feedback by user ID
     public List<FeedbackModel> getFeedbackByUser(Long userId) {
         List<FeedbackModel> feedbacks = feedbackRepository.findByUser_Id(userId);
 
@@ -63,7 +63,7 @@ public class FeedbackService {
         return feedbacks;
     }
 
-    // ✅ Get single feedback
+    //  Get single feedback
     public Optional<FeedbackModel> getFeedbackById(Long id) {
         Optional<FeedbackModel> feedbackOpt = feedbackRepository.findById(id);
 
@@ -77,7 +77,7 @@ public class FeedbackService {
         return feedbackOpt;
     }
 
-    // ✅ Update feedback (keep user + role consistent)
+    //  Update feedback (keep user + role consistent)
     public FeedbackModel updateFeedback(Long id, FeedbackModel updated, String email) {
         FeedbackModel existing = feedbackRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Feedback not found with ID: " + id));
@@ -100,14 +100,14 @@ public class FeedbackService {
         return feedbackRepository.save(existing);
     }
 
-    // ✅ Get user ID by email
+    //  Get user ID by email
     public Long getUserIdByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(User::getId)
                 .orElse(null);
     }
 
-    // ✅ Delete feedback
+    //  Delete feedback
     public void deleteFeedback(Long id) {
         feedbackRepository.deleteById(id);
     }
